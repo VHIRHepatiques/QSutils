@@ -1,0 +1,7 @@
+exportPattern("^[[:alpha:]]+")
+importFrom(Biostrings,DNAStringSet,readDNAStringSet,pairwiseAlignment,nmismatch,consensusMatrix,AA_ALPHABET,AA_STANDARD,AAStringSet,DNA_BASES,readAAStringSet,DNAStringSetList)
+importFrom(BiocGenerics,width)
+import(ape)
+import(ggplot2)
+importFrom(ggseqlogo,theme_logo)
+importFrom("utils", "installed.packages")
