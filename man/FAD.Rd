@@ -4,18 +4,20 @@
 Functional Attribute Diversity.
 }
 \description{
-Computes the Functional Attribute Diversity as the sum of the pairwise distance matrix elements.
+Computes the Functional Attribute Diversity as the sum of the pairwise
+distance matrix elements.
 }
 \usage{
 FAD(dst)
 }
 \arguments{
-  \item{dst}{
+    \item{dst}{
 A "dist" object or a symmetric matrix with pairwise distances.
 }
 }
 \value{
-A value that corresponds to the Functional Attribute Diversity. The sum of matrix elements.
+A value that corresponds to the Functional Attribute Diversity.
+The sum of matrix elements.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -30,17 +32,12 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{DNA.dist}}
 }
 \examples{
-\dontrun{
-
 # Create the object.
-lst <- ReadAmplSeqs("file.fasta")
+lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 # Compute the DNA distances matrix.
 dst <- DNA.dist(lst$hseqs,model="N")
 
 FAD(dst)
 
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

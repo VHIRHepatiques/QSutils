@@ -12,12 +12,13 @@ the reference.
 DottedAlignment(hseqs)
 }
 \arguments{
-  \item{hseqs}{
+    \item{hseqs}{
 DNAStringSet or AAStringSet with haplotype sequences.
 }
 }
 \value{
-A character string vector of the alignment, with dots in the conserved positions. 
+A character string vector of the alignment, with dots in the 
+conserved positions. 
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -27,14 +28,9 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
-\dontrun{
-
-lst <- ReadAmplSeqs("file.fasta")
+lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 strs <- DottedAlignment(lst$hseqs)
 
 #Create a data frame to visualize the result.
 data.frame(Hpl=strs,stringsAsFactors=FALSE)
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

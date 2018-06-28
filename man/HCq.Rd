@@ -1,4 +1,4 @@
-\name{HCq}
+﻿\name{HCq}
 \alias{HCq}
 \alias{HCqVar}
 \alias{HCqProfile}
@@ -6,9 +6,11 @@
 Set of functions to compute Havrda-Charvat estimator.
 }
 \description{
-HCq computes the Havrda-Charvat estimator and HCqVar function the Havrda-Charvat  asymptotic variance for a given exponent. 
-By using HCqProfile a Havrda-Charvat estimator is calculated for a predefined vector of exponents to obtain the full profile
-in the range 0 to Inf.
+HCq computes the Havrda-Charvat estimator and HCqVar function the 
+Havrda-Charvat asymptotic variance for a given exponent. By using HCqProfile
+a Havrda-Charvat estimator is calculated for a predefined vector of 
+exponents to obtain the full 
+profile in the range 0 to Inf.
 }
 \usage{
 HCq(w, q)
@@ -16,10 +18,10 @@ HCqVar(w, q)
 HCqProfile(w, q = NULL)
 }
 \arguments{
-  \item{w}{
+    \item{w}{
 Vector of observed counts or frequencies.
 }
-  \item{q}{
+    \item{q}{
 Exponent. By default a vector of values 1, 2, 3, 4 and Inf.
 }
 }
@@ -32,7 +34,8 @@ when q is NULL a default vector is taken to get the full profile in the range
 \value{
 A value that corresponds to the Havrda-Charvat estimator, in case of using 
 \code{HCq} or \code{HCqVar}. 
-A data frame with the Havrda-Charvat estimator for each exponent when using \code{HCqProfile}.
+A data frame with the Havrda-Charvat estimator for each exponent when using 
+\code{HCqProfile}.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -41,10 +44,11 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 
-Pavoine, S. (2005). M�thodes statistiques pour la mesure de la biodiversit�. UMR CNRS 5558 Biometrie et Biologie Evolutive.
+Pavoine, S. (2005). M?thodes statistiques pour la mesure de la biodiversit?. 
+UMR CNRS 5558 Biometrie et Biologie Evolutive.
 
 }
 \author{
@@ -71,6 +75,3 @@ HCqProfile(nr,c(0:4,Inf))
 # Full profile
 HCqProfile(nr)
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

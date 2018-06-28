@@ -1,14 +1,17 @@
 Package: QSutils
 Type: Package
 Title: Quasispecies Diversity
-Version: 1.0
+Version: 0.99.0
 Date: 2018-04-06
 Author: Josep Gregori i Font and Mercedes Guerrero	
 Maintainer: Mercedes Guerrero <mergumu@gmail.com>
-Depends: R (>= 3.0.0), Biostrings, BiocGenerics
-Imports: ape, ggplot2, ggseqlogo
+Depends: R (>= 3.4.0), Biostrings, BiocGenerics
+Imports: ape, utils, devtools, stats
 Encoding: UTF-8
 Description: Set of utility functions in viral quasispecies analysis with NGS data. Most are equally usefull in metagenomic studies. There are three main types of functions: (1) data manipulation and exploration; functions useful in converting reads to haplotypes and frequencies, repairing reads, intersecting strand haplotypes, and to visualize haplotype alignments. (2) diversity indices; functions to compute diversities and entropies; incidence, abundance and fuctional indices are considered. (3) data simulation; functions useful in generating random viral quasispecies data.   
-License: GPL-2
+License: file LICENSE
+VignetteBuilder: knitr
+Suggests: BiocStyle, knitr, rmarkdown
 NeedsCompilation: no
 Packaged: 2018-05-28 14:56:11 UTC; mervhir
+RoxygenNote: 6.0.1

@@ -1,19 +1,20 @@
-\name{SortByMutations}
+﻿\name{SortByMutations}
 \alias{SortByMutations}
 \title{
 Sorts haplotypes by mutations and abundance.
 }
 \description{
-Sorts and renames the haplotypes by the number of mutations with respect to the dominant haplotype, and by abundance.
+Sorts and renames the haplotypes by the number of mutations with 
+respect to the dominant haplotype, and by abundance.
 }
 \usage{
 SortByMutations(bseqs, nr)
 }
 \arguments{
-  \item{bseqs}{
+    \item{bseqs}{
 DNAStringSet or AAStringSet object with the haplotype alignment.
 }
-  \item{nr}{
+    \item{nr}{
 Vector with the haplotype counts.
 }
 }
@@ -30,7 +31,8 @@ abundance order within mutation number.
 Returns a list with three elements.
 \item{bseqs}{DNAStringSet or AAStringSet with the haplotype sequences.}
 \item{nr}{Vector of the haplotype counts.}
-\item{nm}{Vector of the number of differences of each haplotype with respect to the dominant haplotype.}
+\item{nm}{Vector of the number of differences of each haplotype with respect 
+to the dominant haplotype.}
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -39,8 +41,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -49,13 +51,9 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
-\dontrun{
 
 # Load haplotypes alignment with abundances.
-lst <- ReadAmplSeqs("file.fasta")
+lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 SortByMutations(lst$hseq,lst$nr)
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

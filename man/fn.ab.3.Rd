@@ -4,32 +4,35 @@
 Vector of abundances by increasing root powers.
 }
 \description{
-Function to simulate haplotype abundances of quasispecies by increasing root powers.
+Function to simulate haplotype abundances of quasispecies 
+by increasing root powers.
 }
 \usage{
 fn.ab.3(n, h = 10000)
 }
 \arguments{
-  \item{n}{
+    \item{n}{
 Number of counts to compute.
 }
-  \item{h}{
+    \item{h}{
 Higher value for the counts.
 }
 }
 \details{
-The abundances, as counts, are computed according to the following equation, taking the integer part:
+The abundances, as counts, are computed according to the following 
+equation, taking the integer part:
 \deqn{ max(h^{(1/i)},1); ~~ i=1..n}
 }
 \value{
-Numeric vector with \code{n} decreasing counts, where the first element equals 
-\code{h}, and no element is lower than 1.
+Numeric vector with \code{n} decreasing counts, where 
+the first element equals \code{h}, and no element is lower than 1.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
 }
 \seealso{
-\code{\link{fn.ab.1}}, \code{\link{fn.ab.2}}, \code{\link{GetRandomSeq}},
+\code{\link{fn.ab.1}}, \code{\link{fn.ab.2}}, 
+\code{\link{geom.series}}, \code{\link{GetRandomSeq}},
 \code{\link{GenerateVars}}, \code{\link{Diverge}}
 }
 \examples{
@@ -39,6 +42,3 @@ v1 <- GenerateVars(m1,50,2,c(10,1))
 qs <- c(m1,v1)
 w <- fn.ab.3(length(qs),h=1000) 
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -1,4 +1,4 @@
-\name{Shannon}
+﻿\name{Shannon}
 \alias{Shannon}
 \alias{ShannonVar}
 \alias{NormShannon}
@@ -19,7 +19,7 @@ NormShannon(w)
 NormShannonVar(w)
 }
 \arguments{
-  \item{w}{
+    \item{w}{
 Vector of observed counts or frequencies.
 }
 }
@@ -33,15 +33,13 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
 }
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 
 # Create a vector of observed counts.
@@ -60,6 +58,3 @@ NormShannon(nr)
 NormShannonVar(nr)
 
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -4,21 +4,25 @@
 Function to correct an alignment with gaps and Ns.
 }
 \description{
-Corrects positions in a DNAStringSet or AAStringSet of aligned haplotypes, replacing gaps or Ns with the nucleotide or amino acid in the corresponding position in the reference sequence.
+Corrects positions in a DNAStringSet or AAStringSet of aligned 
+haplotypes, replacing gaps or Ns with the nucleotide or amino acid
+in the corresponding position in the reference sequence.
 }
 \usage{
 CorrectGapsAndNs(hseqs, ref.seq)
 }
 \arguments{
-  \item{hseqs}{
+    \item{hseqs}{
 DNAStringSet or AAStringSet object with the alignment to correct.
 }
-  \item{ref.seq}{
+    \item{ref.seq}{
 Character vector with the reference squence of the alignment.
 }
 }
 \value{
-DNAStringSet or AAStringSet object with the sequences corrected. Duplicated haplotypes may arise as a consequence of this operation. See \code{\link{Recollapse}}.
+DNAStringSet or AAStringSet object with the sequences corrected. 
+Duplicated haplotypes may arise as a consequence of this operation.
+See \code{\link{Recollapse}}.
 }
 \references{
 
@@ -30,9 +34,10 @@ One. 2013 Dec 31;8(12):e83361. doi: 10.1371/journal.pone.0083361. eCollection
 
 Ramírez C, Gregori J, Buti M, Tabernero D, Camós S, Casillas R, Quer J,
 Esteban R, Homs M, Rodriguez-Frías F. A comparative study of ultra-deep
-pyrosequencing and cloning to quantitatively analyze the viral quasispecies using
-hepatitis B virus infection as a model. Antiviral Res. 2013 May;98(2):273-83.
-doi: 10.1016/j.antiviral.2013.03.007. Epub 2013 Mar 20. PubMed PMID: 23523552.
+pyrosequencing and cloning to quantitatively analyze the viral quasispecies
+using hepatitis B virus infection as a model. Antiviral Res. 2013 
+May;98(2):273-83. doi: 10.1016/j.antiviral.2013.03.007. Epub 2013 Mar 20. 
+PubMed PMID: 23523552.
 
 }
 \author{

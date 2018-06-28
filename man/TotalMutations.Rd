@@ -1,4 +1,4 @@
-\name{TotalMutations}
+﻿\name{TotalMutations}
 \alias{TotalMutations}
 \title{
 Number of Mutations.
@@ -10,15 +10,19 @@ Number of Mutations.
 TotalMutations(hseqs,w)
 }
 \arguments{
-  \item{hseqs}{
+    \item{hseqs}{
 DNAStringSet or AAStringSet with the haplotype sequences.
 }
-  \item{w}{
-An optional numeric vector with the haplotype counts to be used to compute the total number of mutations in the population, that is, taking into account haplotype abundances. When \code{w} is NULL a vector of ones is taken as default.
+    \item{w}{
+An optional numeric vector with the haplotype counts to be used to compute
+the total number of mutations in the population, that is, taking into 
+account haplotype abundances. When \code{w} is NULL a vector of ones 
+is taken as default.
 }
 }
 \value{
-A value corresponding to the number of mutations. Note that the wild type is decided taking \code{w} into account.
+A value corresponding to the number of mutations. Note that the wild 
+type is decided taking \code{w} into account.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -27,8 +31,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -37,15 +41,11 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{SegSites}}
 }
 \examples{
-\dontrun{
 
 # Create the object.
-lst <- ReadAmplSeqs("file.fna")
+lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 TotalMutations(lst$hseqs)
 TotalMutations(lst$hseqs,lst$nr)
 
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

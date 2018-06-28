@@ -1,4 +1,4 @@
-\name{Hill}
+﻿\name{Hill}
 \alias{Hill}
 \alias{HillProfile}
 \title{
@@ -7,7 +7,8 @@ Hill numbers.
 \description{
 Functions to compute Hill numbers.
 \code{Hill} computes the Hill number of a single q value.
-\code{HillProfile} computes the Hill numbers for all elements in vector \code{q}.
+\code{HillProfile} computes the Hill numbers for all elements in vector
+\code{q}.
 }
 \usage{
 Hill(w, q)
@@ -15,10 +16,10 @@ HillProfile(w, q = NULL)
 }
 
 \arguments{
-  \item{w}{
+    \item{w}{
 Vector of observed counts or frequencies.
 }
-  \item{q}{
+    \item{q}{
 Exponent. 
 }
 }
@@ -29,7 +30,8 @@ in this case when \code{q} is NULL a default vector is taken to get the full
 profile in the range 0 to Inf.
 }
 \value{
-A value or vector of values that correspond to the Hill number estimators of passed exponents.
+A value or vector of values that correspond to the Hill number estimators 
+of passed exponents.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -38,8 +40,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 
 }
 \author{
@@ -61,6 +63,3 @@ HillProfile(nr,q=c(0:4,Inf))
 # Full Hill numbers profile.
 HillProfile(nr)
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

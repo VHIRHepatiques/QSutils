@@ -1,4 +1,4 @@
-\name{GetRandomSeq}
+﻿\name{GetRandomSeq}
 \alias{GetRandomSeq}
 \title{
 Generate a random sequence.
@@ -10,7 +10,7 @@ Creates a random DNA sequence of a given length.
 GetRandomSeq(seq.len)
 }
 \arguments{
-  \item{seq.len}{
+    \item{seq.len}{
 The sequence length.
 }
 }
@@ -27,6 +27,3 @@ Josep Gregori and Mercedes Guerrero
 set.seed(123)
 GetRandomSeq(50)
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

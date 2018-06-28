@@ -1,4 +1,4 @@
-\name{GiniSimpson}
+﻿\name{GiniSimpson}
 \alias{GiniSimpson}
 \alias{GiniSimpsonMVUE}
 \alias{GiniSimpsonVar}
@@ -6,7 +6,9 @@
 Functions to calculate GiniSimpson index.
 }
 \description{
-GiniSimpson calculates the unbiased estimator, GiniSimpsonVar computes Gini-Simpson asymptotic variance and GiniSimpsonMVUE the minimum variance unbiased estimator of the Gini-Simpson index.
+GiniSimpson calculates the unbiased estimator, GiniSimpsonVar computes 
+Gini-Simpson asymptotic variance and GiniSimpsonMVUE the minimum variance 
+unbiased estimator of the Gini-Simpson index.
 }
 \usage{
 GiniSimpson(w)
@@ -14,7 +16,7 @@ GiniSimpsonMVUE(w)
 GiniSimpsonVar(w)
 }
 \arguments{
-  \item{w}{
+    \item{w}{
 Vector of observed counts or frequencies.
 }
 }
@@ -28,8 +30,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
+PubMed PMID: 24389655.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -48,6 +50,3 @@ GiniSimpsonVar(nr)
 # MVUE Gini-Simpson index.
 GiniSimpsonMVUE(nr)
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

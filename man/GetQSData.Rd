@@ -4,23 +4,25 @@
 Read aligned sequences, filters at minimum abundance and sorts the sequences.
 }
 \description{
-Read amplicon aligned sequences with abundance data, filter at a minimum given abundance, and sort by mutations and abundance.
+Read amplicon aligned sequences with abundance data, filter at a minimum 
+given abundance, and sort by mutations and abundance.
 }
 \usage{
-GetQSData(flnm,min.pct=0.1,type)
+GetQSData(flnm,min.pct=0.1,type="DNA")
 }
 \arguments{
-  \item{flnm}{
-Fasta file with haplotypes sequences and their frequencies. The header of each haplotype 
-in the fasta file is composed of an ID followed by a vertical bar '|' followed by the read 
-counts, and eventually followed by another vertical bar
-and additional information (i.e. Hpl.2.0001|15874|25.2)
+    \item{flnm}{
+Fasta file with haplotypes sequences and their frequencies. The header of
+eachhaplotype in the fasta file is composed of an ID followed by a vertical
+bar '|' followed by the read counts, and eventually followed by another 
+vertical bar and additional information (i.e. Hpl.2.0001|15874|25.2)
 }
-  \item{min.pct}{
+    \item{min.pct}{
 Minimum abundance, in \%, to filter the reads. Defaults to 0.1\%.
 }
-  \item{type}{
-Character string specifying the type of the sequences in the fasta file. This must be one of "DNA" or "AA". It is "DNA" by default.
+    \item{type}{
+Character string specifying the type of the sequences in the fasta file.
+This must be one of "DNA" or "AA". It is "DNA" by default.
 }
 }
 \details{
@@ -38,7 +40,8 @@ result the haplotypes are renamed according to the pattern
 Returns a list with three elements.
 \item{bseqs}{DNAStringSet or AAStringSet with the haplotype sequences.}
 \item{nr}{Vector of haplotype counts.}
-\item{nm}{Vector of number of mutations of each haplotype with respect to the dominant (most frequent) haplotype.}
+\item{nm}{Vector of number of mutations of each haplotype with respect 
+to the dominant (most frequent) haplotype.}
 }
 \references{
 
@@ -50,9 +53,10 @@ One. 2013 Dec 31;8(12):e83361. doi: 10.1371/journal.pone.0083361. eCollection
 
 Ramírez C, Gregori J, Buti M, Tabernero D, Camós S, Casillas R, Quer J,
 Esteban R, Homs M, Rodriguez-Frías F. A comparative study of ultra-deep
-pyrosequencing and cloning to quantitatively analyze the viral quasispecies using
-hepatitis B virus infection as a model. Antiviral Res. 2013 May;98(2):273-83.
-doi: 10.1016/j.antiviral.2013.03.007. Epub 2013 Mar 20. PubMed PMID: 23523552.
+pyrosequencing and cloning to quantitatively analyze the viral quasispecies
+using hepatitis B virus infection as a model. Antiviral Res. 2013 
+May;98(2):273-83. doi: 10.1016/j.antiviral.2013.03.007. Epub 2013 Mar 20.
+PubMed PMID: 23523552.
 
 }
 \author{
@@ -63,11 +67,6 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
-\dontrun{
-
-lst<-GetData("file.fasta",min.pct=0.1,type="DNA")
+lst<-GetQSData("QSutils/extdata/ToyData_10_50_1000.fna",min.pct=0.1,type="DNA")
 lst
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

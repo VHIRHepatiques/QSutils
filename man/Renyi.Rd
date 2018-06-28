@@ -1,4 +1,4 @@
-\name{Renyi}
+﻿\name{Renyi}
 \alias{Renyi}
 \alias{RenyiProfile}
 \title{
@@ -14,10 +14,10 @@ Renyi(w, q)
 RenyiProfile(w, q = NULL)
 }
 \arguments{
-  \item{w}{
+    \item{w}{
 Vector of observed counts or frequencies.
 }
-  \item{q}{
+    \item{q}{
 Exponent. A single value for \code{Renyi}, a vector of values or NULL for
 \code{RenyiProfile}.
 }
@@ -33,10 +33,11 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 
-Pavoine, S. (2005). Méthodes statistiques pour la mesure de la biodiversité. UMR CNRS 5558 «Biométrie et Biologie Evolutive».
+Pavoine, S. (2005). Méthodes statistiques pour la mesure de la biodiversité. 
+UMR CNRS 5558 «Biométrie et Biologie Evolutive».
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -56,6 +57,3 @@ RenyiProfile(nr,c(0:4,Inf))
 RenyiProfile(nr)
 
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

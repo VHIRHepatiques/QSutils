@@ -1,20 +1,23 @@
-\name{MutsTbl}
+﻿\name{MutsTbl}
 \alias{MutsTbl}
 \title{
 Table of mutation frequencies by position.
 }
 \description{
-Computes the table of mutation frequencies by position with respect to the alignment consensus.
+Computes the table of mutation frequencies by position with respect to 
+the alignment consensus.
 }
 \usage{
 MutsTbl(hseqs,nr=NULL)
 }
 \arguments{
-  \item{hseqs}{
+    \item{hseqs}{
 DNAStringSet or AAStringSet with the aligned haplotype sequences.
 }
-  \item{nr}{
-An optional numeric vector with the haplotype counts to be used to take into account the haplotype frequencies. When \code{nr} is NULL the same weight is given to each haplotype.
+    \item{nr}{
+An optional numeric vector with the haplotype counts to be used to take 
+into account the haplotype frequencies. When \code{nr} is NULL the same 
+weight is given to each haplotype.
 }
 }
 \value{
@@ -29,8 +32,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
+PubMed PMID: 24389655.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -40,16 +43,12 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
-\dontrun{
 # Load the haplotypes alignment with abundances.
-lst <- ReadAmplSeqs("file.fna")
+lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 # Table of mutations in the alignemnt regardless of abundances.
 MutsTbl(lst$hseqs)
 
 # Table of mutations taking into account haplotype abundances
 MutsTbl(lst$hseqs,lst$nr)
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

@@ -9,11 +9,8 @@
 \packageDescription{QSutils}
 }
 \details{
-
 The DESCRIPTION file:
 \packageDESCRIPTION{QSutils}
-\packageIndices{QSutils}
-~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
 \packageAuthor{QSutils}
@@ -27,8 +24,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 
 Gregori J, Esteban JI, Cubero M, Garcia-Cehic D, Perales C, Casillas R,
 Alvarez-Tejado M, Rodríguez-Frías F, Guardia J, Domingo E, Quer J. Ultra-deep
@@ -38,8 +35,9 @@ One. 2013 Dec 31;8(12):e83361. doi: 10.1371/journal.pone.0083361. eCollection
 
 Ramírez C, Gregori J, Buti M, Tabernero D, Camós S, Casillas R, Quer J,
 Esteban R, Homs M, Rodriguez-Frías F. A comparative study of ultra-deep
-pyrosequencing and cloning to quantitatively analyze the viral quasispecies using
-hepatitis B virus infection as a model. Antiviral Res. 2013 May;98(2):273-83.
-doi: 10.1016/j.antiviral.2013.03.007. Epub 2013 Mar 20. PubMed PMID: 23523552.
+pyrosequencing and cloning to quantitatively analyze the viral quasispecies 
+using hepatitis B virus infection as a model. Antiviral Res. 2013
+May;98(2):273-83.doi: 10.1016/j.antiviral.2013.03.007. Epub 2013 Mar 20. 
+PubMed PMID: 23523552.
 
 }

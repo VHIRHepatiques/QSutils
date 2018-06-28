@@ -4,22 +4,26 @@
 Donsampling followed by fringe trimming.
 }
 \description{
-Diversity indices are more or less influenced by the sample size on  which they were computed. This function helps in minimizing the bias tied to a sample size. First the vector of abundances is scaled to a lower sample size, then all haplotypes with abundances below a given threshold are excluded with high confidence.
+Diversity indices are more or less influenced by the sample size on  
+which they were computed. This function helps in minimizing the bias 
+tied to a sample size. First the vector of abundances is scaled to a 
+lower sample size, then all haplotypes with abundances below a given 
+threshold are excluded with high confidence.
 }
 \usage{
-DSFT(nr, sz, p.cut = 0.002, conf = 0.95)
+DSFT(nr, size, p.cut = 0.002, conf = 0.95)
 }
 \arguments{
-  \item{nr}{
+    \item{nr}{
 Vector of observed haplotype counts.
 }
-  \item{sz}{
+    \item{size}{
 Size to downsample.
 }
-  \item{p.cut}{
+    \item{p.cut}{
 Abundance threshold.
 }
-  \item{conf}{
+    \item{conf}{
 Confidence in trimming.
 }
 }
@@ -34,8 +38,6 @@ Josep Gregori and Mercedes Guerrero
 }
 
 \examples{
-
+\dontrun{
+#Algo}
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

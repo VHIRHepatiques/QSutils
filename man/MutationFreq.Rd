@@ -15,20 +15,24 @@ MutationFreq(nm,nr=NULL,len=1)
 MutationFreqVar(nm,nr=NULL,len=1)
 }
 \arguments{
-  \item{nm}{
-Vector of distances or differences with respect to the dominant haplotype including itself
+    \item{nm}{
+Vector of distances or differences with respect to the dominant haplotype 
+including itself
 (i.e. nm[1] is 0 if w[1]==max(w)).
 }
-  \item{nr}{
+    \item{nr}{
 An optional numeric vector with the haplotype counts.
 }
-  \item{len}{
-The alignment width when nm is number of differences, otherwise 1. Defaults to 1.
+    \item{len}{
+The alignment width when nm is number of differences, otherwise 1. Defaults 
+to 1.
 }
 }
 \value{
 A value corresponding to the mutation frequency for \code{MutationFreq} or its
-variance for \code{MutationFreqVar}. When \code{nr} is NULL the same weight is given to each haplotype and the computed value corresponds to the mutation frequency by entity. 
+variance for \code{MutationFreqVar}. When \code{nr} is NULL the same weight is
+given to each haplotype and the computed value corresponds to the mutation 
+frequency by entity. 
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -37,8 +41,8 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 }
 
 \author{
@@ -48,20 +52,17 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{DNA.dist}}, \code{\link{GetQSData}}, \code{\link{ReadAmplSeqs}}
 }
 \examples{
-\dontrun{
 
 #Load alignment with abundances
-lst <- GetData("file.fna")
+lst <- GetQSData("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 # Mutation frequency 
-MutationFreq(lst$nm,len=width(lst$hseqs)[1])
+dst <- DNA.dist(lst$seqs,model="raw")
+MutationFreq(dst,len=width(lst$seqs)[1])
 
 # Mutation frequency with abundances.
-MutationFreq(lst$nm,lst$nr,len=width(lst$hseqs)[1])
+MutationFreq(lst$nm,lst$nr,len=width(lst$seqs)[1])
 
 # Variance of the mutation frequency.
-MutationFreqVar(lst$nm,lst$nr,len=width(lst$hseqs)[1])
-}}
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+MutationFreqVar(lst$nm,lst$nr,len=width(lst$seqs)[1])
+}

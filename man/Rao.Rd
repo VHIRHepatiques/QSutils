@@ -20,13 +20,15 @@ RaoPowProfile(dst,w=NULL,q=NULL)
 }
 
 \arguments{
-  \item{dst}{
+    \item{dst}{
 A "dist" object, the output of DNA.dist function.
 }
-  \item{w}{
-An optional numeric vector with the haplotype counts to be used to take into account the haplotype frequencies. When \code{w} is NULL the same weight is given to each haplotype.
+    \item{w}{
+An optional numeric vector with the haplotype counts to be used to take into
+account the haplotype frequencies. When \code{w} is NULL the same weight is 
+given to each haplotype.
 }
-  \item{q}{
+    \item{q}{
 Exponent. A single value for \code{Rao}, \code{RaoVar} and \code{RaoPow}. 
 A vector of values for \code{RaoPowProfile}.
 The default value for \code{RaoPowProfile} is a set of exponents to obtain a
@@ -45,10 +47,11 @@ quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
 
 Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
 Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
-approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. PubMed 
-PMID: 24389655.
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2. 
+PubMed PMID: 24389655.
 
-Pavoine, S. (2005). Méthodes statistiques pour la mesure de la biodiversité. UMR CNRS 5558 «Biométrie et Biologie Evolutive».
+Pavoine, S. (2005). Méthodes statistiques pour la mesure de la biodiversité. 
+UMR CNRS 5558 «Biométrie et Biologie Evolutive».
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -57,15 +60,15 @@ Josep Gregori and Mercedes Guerrero
 \code{\link{DNA.dist}}, \code{\link{ReadAmplSeqs}}
 }
 \examples{
-\dontrun{
+
 # Load haplotypes alignment with abundances.
-lst <- ReadAmplSeqs("file.fasta")
+lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 # DNA pairwise distances.
 dst <- DNA.dist(lst$hseqs,model="N")
 
 Rao(dst,lst$nr)
 RaoVar(dst,lst$nr)
 RaoPow(dst,2,lst$nr)
-RaoPowProlife(dst,lst$nr,c(0:4,Inf))
-RaoPowProlife(dst,lst$nr)
-}}
+RaoPowProfile(dst,lst$nr,c(0:4,Inf))
+RaoPowProfile(dst,lst$nr)
+}

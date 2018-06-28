@@ -5,16 +5,17 @@ Generate a set of diverging haplotypes.
 }
 \description{
 Generates a set of diverging haplotypes from the given DNA sequence.
-The haplotypes produced share a pattern of divergence with increasing number of mutations.
+The haplotypes produced share a pattern of divergence with increasing 
+number of mutations.
 }
 \usage{
 Diverge(vm, seq)
 }
 \arguments{
-  \item{vm}{
+    \item{vm}{
 Vector with number of diverging mutations to be generated.
 }
-\item{seq}{
+    \item{seq}{
 Reference sequence from which to generate the variants.
 }
 }
@@ -39,6 +40,3 @@ m1 <- GetRandomSeq(50)
 hpl <- Diverge(3:6,m1)
 DottedAlignment(DNAStringSet(hpl))
 }
-
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
