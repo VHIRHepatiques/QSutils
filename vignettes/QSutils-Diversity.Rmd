@@ -1,0 +1,510 @@
+---
+title: "Characterizing Quasispecies"
+author: "Gregori, J and Guerrero, M"
+date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+bibliography: diversity.bib
+output: 
+    BiocStyle::html_document:
+        number_sections: yes
+        toc_float: true
+vignette: >
+    %\VignetteIndexEntry{QSutils-Diversity}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Quasiespeces complexity by biodiversity indices
+
+RNA and DNA viruses replicated by low fidelity polymerases generate viral 
+quasispecies, a collection of closely related viral genomes.
+
+The high replication error rate that generates this quasispecies is due to the 
+lack of proofreading mechanisms, and this added to the high replicative rate of
+some  viruses, arise many mutations with each viral replication cycle.
+
+The virus complexity has an obvious participation in adaptive potential. 
+Complexity of a viral quasispecies can be defined as the intrinsic property that
+quantifies the diversity and frequency of haplotypes, independently of the 
+population size that contains them. [@Gregori2016] [@Gregori2014]
+
+Quasiespices complexity can explain or predict virus behavior, so it has an 
+obvious interest for clinical reasons. We are often interested in the 
+comparison  of diversity indices of sequential samples of a patient or among 
+groups of patients. These comparisons may be informative of the patient 
+evolution or the appropriateness of a given treatment.
+
+QSUtils is a package intended to be used with quasispecie amplicon NGS data, but
+it could be useful as well in analyzing 16S/18S ribosomal-based metagenomics or 
+tumor genetic diversity by amplicons.
+
+In this tutorial we illustrate the use of functions in the package to compute
+diversity indices, that may be classified as incidence-based, abundance-based 
+and functional indices. 
+
+
+#Install package and load data
+
+First of all, the package need to be installed and then loaded.
+
+```{r,message=FALSE}
+library(devtools)
+install_git("https://github.com/VHIRHepatiques/QSutils")
+
+library(QSutils)
+```
+
+Then the dataset to work with the diversity indices should be loaded. 
+This vignette deals with the different ways to load data:
+[Simulation vignette for package users](QSutils-Simulation.html) is available 
+as well.
+
+```{r}
+lst <- ReadAmplSeqs("../inst/extdata/ToyData_10_50_1000.fna",type="DNA")
+lst
+```
+
+
+#Incidence-based diversity indices or richness indices
+
+Incidence-based diversity indices corresponds to the number of observed 
+entities,irrespective of their abundances. The main incidence indices are the
+number of haplotypes, the number of polymorphic sites and the number of
+mutations. This indices can be computed as follows:
+
++ number of haplotypes
+
+    ```{r}
+    length(lst$hseqs)
+    ```
+
+In this fasta file there are 10 haplotypes reported. This can be calculated with
+the length of the DNAStringSet object.
+
++ The number of polymorphic sites
+
+    ```{r}
+    SegSites(lst$hseqs)
+    ```
+
+In this example there are 4 polymorphic sites, the mutated positions with 
+respect to the dominant haplotype.
+
++ Number of mutations
+
+    ```{r}
+    TotalMutations(lst$hseqs)
+    ```
+
+Returns the total number of mutations observed in the alignment. 
+
+#Abundance-based diversity indices
+
+Abundance-based diversity indices take into account the observed entities and 
+their relative abundance in the population. 
+
++ Shannon entropy
+
+    ```{r}
+    Shannon(lst$nr)
+    NormShannon(lst$nr)
+    ```
+
+    The Shannon entropy is a measure of uncertainty. This index varies from 0, 
+    when there is a single haplotype, to the logarithm of the number of 
+    haplotypes. It represents the uncertainty in assigning a randomly genome to 
+    the corresponding haplotype in the studied population. This index is 
+    commonly used in the normalized form, although is recommended to use the
+    unnormalized one. The normalized form in ecology sense constitutes a measure
+    of evenness rather than diversity. 
+    
+    The variance of the Shannon entropy and the normalized Shannon entropy can 
+    be computed with:
+
+    ```{r}
+    ShannonVar(lst$nr)
+    NormShannonVar(lst$nr)
+    ```
+
++ Gini-Simpson
+
+    ```{r}
+    GiniSimpson(lst$nr)
+    GiniSimpsonMVUE(lst$nr)
+    ```
+    
+    Gini-Simpson index expresses the probability that two randomly sampled 
+    molecules from the viral population correspond to different haplotypes. Has
+    a range of variation from 0, when there is a single haplotype, to 
+    asymptotically 1, when there are an infinity of equally abundant haplotypes.
+    The intrepretation of this index is more intuitive and clear than that of 
+    the Shannon entropy, is scarcely sensitive to rare haplotypes, as it gives 
+    higher weight to the more abundant variants. 
+    
+    The variance of the Gini-Simpson indexd is obteined with:
+    ```{r}
+    GiniSimpsonVar(lst$nr)
+    ```
+    
++ Hill numbers
+
+    Although both Shannon entropy and the Gini-simpon, and many of other 
+    published indices, are considered measures of diversity, their units do not
+    allow an easy interpretable and intuitive measure of real diversity. They 
+    are not linear with respect to the addition of new haplotypes, and they tent
+    to saturate; the higher the number of haplotypes the less sensitive to 
+    frequency changes. Otherwise Hill numbers are a generalizaion of diversity 
+    measures in units of equally abundant species. 
+
+    ```{r}
+    Hill(lst$nr,q=1)
+    ```
+
+    Hill function computes the Hill number for a given order, _q_, but in 
+    QSutils there is a wrapper function that computes a profile of Hill number 
+    for different _q_ values that enable to see the behabour of increasing _q_ 
+    in a plot. 
+        
+
+    ```{r, fig.cap="Hill numbers profile", eval=FALSE}
+    HillProfile(lst$nr)
+    plot(HillProfile(lst$nr),type ="b", main="Hill numbers obtained
+        with HillProfile")
+    ```
+    
+    ```{r,echo=FALSE}
+    HillProfile(lst$nr)
+    ```
+    
+```{r, fig.cap="Hill numbers profile", echo=FALSE}
+plot(HillProfile(lst$nr),type ="b", main="Hill numbers obtained
+    with HillProfile")
+```
+
+As the order of the Hill number increases the measure of diversity becomes 
+less sensitive to rare haplotypes. Take notice that the Hill number of order
+_q_=0, is simply the number of haplotypes. _q_=1 is undefined but is the 
+limit as q tends to 1 is the exponential of the Shannon entroy. _q_=2 is the
+inverse of the Simpson index and _q_=`Inf` is the inverse of the relative 
+abundance of the rarest haplotype. 
+    
++ Rényi entropy
+
+    ```{r}
+    Renyi(lst$nr,q=3)
+    ```
+
+    Rényi entropy is a related form of Hill number is the Rényi entropy which 
+    equals the logarithm of the Hill numbers.    
+    
+    ```{r,fig.cap="Rényi entropy profile",eval=FALSE}
+    RenyiProfile(lst$nr)
+    plot(RenyiProfile(lst$nr),type ="b", main="Rényi entropy obtained with
+        RenyiProfile")
+    ```
+
+    ```{r,echo=FALSE}
+    RenyiProfile(lst$nr)
+    ```
+
+```{r,fig.cap="Rényi entropy profile",echo=FALSE}
+plot(RenyiProfile(lst$nr),type ="b", main="Rényi entropy obtained with
+    RenyiProfile")
+```
+    
+`RenyProfile`, which is a wrapper function of `Renyi` computes the Rényi 
+entropy for a set of predefined _q_ to compute a plot to see the behaveour
+of this index as _q_ increases.
+    
++ Havrda-Charvat estimator
+
+    ```{r}
+    HCq(lst$nr, q= 4)
+    ```
+    
+    Havrda-Charvat entropy is a measure of diversity of each population, is a 
+    generalization of Shannon entropy.
+    
+    ```{r}
+    HCqVar(lst$nr, q= 4)
+    ```
+    
+    The asymptotic variance for a given exponent of this estimator can be 
+    computed with `HCqVar`. 
+    
+    ```{r,fig.cap="Havrda-Charvat entropy profile",eval=FALSE}
+    HCqProfile(lst$nr)
+    plot(HCqProfile(lst$nr),type ="b", main="Havrda-Charvat entropy obtained 
+        with HCqProfile")
+    ```
+
+    ```{r,echo=FALSE}
+    HCqProfile(lst$nr)
+    ```
+    
+```{r,fig.cap="Havrda-Charvat entropy profile",echo=FALSE}
+plot(HCqProfile(lst$nr),type ="b", main="Havrda-Charvat entropy obtained 
+    with HCqProfile")
+```
+    
+As Hill function, `HCq` function computes the Havrda-Charvat entropy for a 
+given order, _q_, but in QSutils there is a wrapper function that computes
+a profile of Havrda-Charvat entropy for different _q_ values that enable to
+see the behabour of increasing _q_ in a plot. 
+    
+    
+# Functional diversity 
+
+One step further take into account the differences among haplotypes in the 
+quasispecies by means considering genetic distances. 
+
+## Incidence-based funcional diversity indices
+
+This set of functions just consider distances between haplotype, computed with 
+the function `DNA.dist`, that can be plotted with `cor.plot` function from the 
+package _psych_.
+
+```{r,message=FALSE,fig.cap="Correlation among haplotype distances"}
+dst <- DNA.dist(lst$hseqs,model="raw")
+library(psych)
+D <- as.matrix(dst)
+rownames(D) <- sapply(rownames(D),function(str) strsplit(str,
+                split="\\|")[[1]][1])
+colnames(D) <- rownames(D)
+D
+cor.plot(D,zlim=c(0,max(D)),las=2)
+```
+
+
++ Average mutation frequency by entity
+
+    ```{r}
+    MutationFreq(dst)  # Corregir man
+    ```
+
+    The mean mutation frequency by entiti, _Mfe_, takes as a refereferebce and 
+    measures the fraction of nucleotides in the haplotype alignment that are 
+    different with respect to this reference. The reference sequence is 
+    considered the dominant haplotype in the quasispecie. 
+
++ FAD
+
+    ```{r}
+    FAD(dst)
+    ```
+
+    The functional attribute diversity, _FAD_, the sum of pairwise distances 
+    between species but it does not take into account species abundances.
+
++ Nucleotide diversity by entity
+
+    ```{r}
+    NucleotideDiversity(dst)  
+    ```
+
+    The nucleotide diversity by entity, \(\pi_e\), is a transformation of `FAD` 
+    and it express the average difference among haplotypes in the alignment. 
+
+## Abundance-based funcional diversity indices
+
++ Average mutation frequency by molecule
+
+    ```{r}
+    nm <- nmismatch(pairwiseAlignment(lst$hseqs,lst$hseqs[1]))
+    MutationFreq(nm,lst$nr,len=width(lst$hseqs)[1])
+    ```
+
+    The proportion of different nucleotides at the molecular level, _Mfm_, takes
+    one reference and measures the fraction of nucleotides in the population 
+    that are different with respect to this reference. 
+    
+    ```{r}
+    MutationFreqVar(nm,lst$nr,len=width(lst$hseqs)[1])
+    ```
+    
+    The variance of  _Mfm_ is calculated with `MutationFreqVar` function. 
+    
++ Nucleotide diversity 
+
+    ```{r}
+    NucleotideDiversity(dst,lst$nr)
+    ```
+
+    The nucleotide diversity, \(\pi_m\), related to the Rao entropy in ecology,
+    corresponds to the mean genetic distance among molecules in the population. 
+
++ Rao entropy:
+
+    ```{r}
+    RaoPow(dst,4,lst$nr)
+    ```
+
+    To obtain the Rao entropy for a given order of _q_ the function `RaoPow` 
+    is used. 
+
+    ```{r}
+    RaoVar(dst,lst$nr)
+    ```
+
+    The variance of \(\pi_m\) is calculated with `RaoVar` function. 
+
+    ```{r,fig.cap="Havrda-Charvat entropy profile",eval=FALSE}
+    RaoPowProfile(dst,lst$nr)
+    plot(RaoPowProfile(dst,lst$nr),type ="b", main="Rao entropy obtained 
+        with RaoPowProfile")
+    ```
+
+    ```{r,echo=FALSE}
+    RaoPowProfile(dst,lst$nr)
+    ```
+    
+```{r,fig.cap="Havrda-Charvat entropy profile",echo=FALSE}
+plot(RaoPowProfile(dst,lst$nr),type ="b", main="Rao entropy obtained 
+        with RaoPowProfile")
+```
+
+# Sample size and bias
+
+The diversity we measure in sampling a viral quasispecies is necessarily tied
+to  the sample size. The larger the coverage, the larger the number of 
+haplotypes we may observe, the larger the number of polymorphic sites and 
+mutations. The same  effect may be observed with the Shannon entropy and other
+diversity indices.
+
+Because of the variability in all experimental procedures the best pooling of
+samples never results in perfectly balanced coverages, which complicates the
+comparison of diversity indices biased by sample size.
+Hence a sample size correction method is required to obtain fair inferences.
+The literature in Ecology shows different correction methods which
+unfortunately are not aplicable with NGS beacuse of a differential trait.
+With NGS sooner or later we are obliged to get rid of all haplotypes with
+fequencies below a threshold considered the technical noise level. This lower
+end of frequencies contains the information required by most stablished 
+corrections.
+
+The correction we found that works best consists in determining the minimum
+coverage among all samples to be compared, down sampling the other samples to 
+this minimum, simply by rescaling, and then remove all haplotypes with resulting
+frequencies below a given threshold with high confidence, a step we dubbed 
+fringe trimming. The function $DSFT$ is used to correct the quasispecies
+composition to a given sample size. It takes four parameters, $nr$ the vector of
+haplotype frequencies in the original sample, $size$ the total number of reads
+in the new sample previously to the abundance filter, $p.cut$ the abundance
+threshold in the filter, and $conf$ the level of confidence in trimming 
+haplotypes, which defaults to 0.95. $DSFT$ returns a vector of logicals with 
+FALSE for all haplotypes to be removed by the correction.
+
+The next code shows the impact of each data treatment step in the determination
+of the Shannon entropy. First we simulate the frequencies of haplotypes in a
+quasispecies population. Then we take repeated samples from this population,
+of size 2000 and 5000 reads. We compute the Shannon entropy of the raw samples,
+of the samples after noise filtering at an abundance of 0.1%, and after the DSFT
+corrections at size 2000, and filtering at 0.2% with 95% confidence.
+
+```{r,fig.cap="Diversity indices variation with the sample size"}
+set.seed(123)
+n <- 2000
+y <- geom.series(n,0.8)+geom.series(n,0.00025)
+nr.pop <- round(y*1e7)
+
+thr <- 0.1
+sz1 <- 5000
+sz2 <- 10000
+
+qs.sample <- function(nr.pop,sz1,sz2){ 
+    div <- numeric(6)
+    nr.sz1 <- table(sample(length(nr.pop),size=sz1,replace=TRUE,p=nr.pop))
+    div[1] <- Shannon(nr.sz1)
+    nr.sz1 <- nr.sz1[nr.sz1>=sz1*thr/100]
+    div[3] <- Shannon(nr.sz1)
+    div[5] <- Shannon(nr.sz1[DSFT(nr.sz1,sz1)])
+    
+    nr.sz2 <- table(sample(length(nr.pop),size=sz2,replace=TRUE,p=nr.pop))
+    div[2] <- Shannon(nr.sz2)
+    nr.sz2 <- nr.sz2[nr.sz2>=sz2*thr/100]
+    div[4] <- Shannon(nr.sz2)
+    div[6] <- Shannon(nr.sz2[DSFT(nr.sz2,sz2)])
+    div
+}
+
+hpl.sim <- replicate(2000,qs.sample(nr.pop,sz1,sz2))
+nms <- paste(c(sz1,sz2))
+
+par(mfrow=c(1,3))
+
+boxplot(t(hpl.sim[1:2,]),names=nms,col="lavender",las=2,
+        ylab="Shannon entropy",main="raw")
+boxplot(t(hpl.sim[3:4,]),names=nms,col="lavender",las=2,
+        ylab="Shannon entropy",main="filt")
+boxplot(t(hpl.sim[5:6,]),names=nms,col="lavender",las=2,
+        ylab="Shannon entropy",main="DSFT")
+```
+
+We may see that despite coming from the same viral population, the distribution 
+of Shannon entropy values of the raw samples of the 5000 reads shows higher
+values than that of the 2000 reads. 
+
+After removing all haplotypes with frequencies below 0.1%, the effect is revesed
+with Shannon entropies much lower for the big samples.
+The correction by DSFT brings both distributions to comparable levels.
+
+This behaviour is typical for samples with long queus of very low fitness and
+defective haplotypes, possibly worsened by technical errors in sample prep and
+sequencing.
+
+## The rare haplotype load
+
+We found that the fraction of reads belonging to haplotypes below 1% in 
+frequency, the rare haplotypes load (RHL) is a robust index of quasispecies 
+diversity, specially suitable to detect mutagenic processes. This index is also 
+robust and don't requires sample size corrections provided that the coverage 
+is high enough. The RHL computation is done without previous abundance filter.
+
+Lets generate a random quasispecies with a RHL of about 25%:
+
+```{r}
+set.seed(123)
+n <- 2000
+y <- geom.series(n,0.8)+geom.series(n,0.0002)
+nr.pop <- round(y*1e7)
+rare <- nr.pop/sum(nr.pop) < 0.01
+RHL <- sum(nr.pop[rare])/sum(nr.pop)
+round(RHL,4)
+```
+
+Repeating the sampling process seen before for the Shannon entropy, we obtain
+median values for RHL very close to the population value for both sample sizes.
+
+The population value is shown in the next figure as a dash-dot horizontal line.
+
+```{r,fig.cap=""}
+thr <- 0.1
+sz1 <- 5000
+sz2 <- 10000
+qs.sample <- function(nr.pop,sz1,sz2){
+    div <- numeric(2)
+    nr.sz1 <- table(sample(length(nr.pop),size=sz1,replace=TRUE,p=nr.pop))
+    rare <- nr.sz1/sum(nr.sz1) < 0.01
+    div[1] <- sum(nr.sz1[rare])/sum(nr.sz1)
+    nr.sz2 <- table(sample(length(nr.pop),size=sz2,replace=TRUE,p=nr.pop))
+    rare <- nr.sz1/sum(nr.sz2) < 0.01
+    div[2] <- sum(nr.sz2[rare])/sum(nr.sz2)
+    div
+}
+
+hpl.sim <- replicate(2000,qs.sample(nr.pop,sz1,sz2))
+nms <- paste(c(sz1,sz2))
+boxplot(t(hpl.sim),names=nms,col="lavender",las=2,ylab="RHL")
+abline(h=RHL,lty=4,col="navy")
+```
+
+***
+
+```{r,echo=FALSE}
+sessionInfo()
+```
+
+#References

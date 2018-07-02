@@ -31,7 +31,14 @@ Confidence in trimming.
 Vector of logicals, with false the haplotypes to be excluded.
 }
 \references{
-2013,2016
+Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
+quasispecies complexity measures. Virology. 2016 Jun;493:227-37. doi:
+10.1016/j.virol.2016.03.017. Epub 2016 Apr 6. Review. PubMed PMID: 27060566.
+
+Gregori J, Salicrú M, Domingo E, Sanchez A, Esteban JI, Rodríguez-Frías F,
+Quer J. Inference with viral quasispecies diversity indices: clonal and NGS
+approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
+PubMed PMID: 24389655.
 }
 \author{
 Josep Gregori and Mercedes Guerrero
@@ -39,5 +46,5 @@ Josep Gregori and Mercedes Guerrero
 
 \examples{
 \dontrun{
-#Algo}
-}
+#Algo
+}}

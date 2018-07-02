@@ -1,5 +1,5 @@
 ---
-title: "Simulating Quasispecies"
+title: "Simulating Quasispecies Composition"
 author: "Gregori, J and Guerrero, M"
 date: "`r format(Sys.Date(), '%m/%d/%Y')`"
 bibliography: simulation.bib
@@ -19,43 +19,47 @@ BiocStyle::markdown()
 
 # Introduction 
 
-A viral quasispecie is understood as a collection of closely related viral genomes
-produced by viruses with low replication fidelity.
-RNA viruses show a high replication error rate due to the lack of proofreading
-mechanisms, and it is estimated that for viruses with typically high replicative
-loads every possible point mutation and many double mutations are generated with
+A viral quasispecie is understood as a collection of closely related viral
+genomes produced by viruses with low replication fidelity. RNA viruses show
+a high replication error rate due to the lack of proofreading mechanisms,
+and it is estimated that for viruses with typically high replicative loads 
+every possible point mutation and many double mutations are generated with
 each viral replication cycle, and may be present within the population at
-any time. Given this inherent dynamics, we are often interested in the comparison 
-of diversity indices of sequential samples of a patient or among groups of patients.
-These comparisons may be informative of the patient evolution or the appropriateness
-of a given treatment.
+any time. Given this inherent dynamics, we are often interested in the 
+comparison  of diversity indices of sequential samples of a patient or 
+among groups of patients. These comparisons may be informative 
+of the patient evolution or the appropriateness of a given treatment.
 
-QSUtils is a package intended to be used with quasispecie amplicon NGS data, but it
-could be useful as well in analyzing 16S/18S ribosomal-based metagenomics or tumor
-genetic diversity by amplicons.
+QSUtils is a package intended to be used with quasispecie amplicon NGS 
+data, but it could be useful as well in analyzing 16S/18S ribosomal-based 
+metagenomics or tumor genetic diversity by amplicons.
 
-In this tutorial we illustrate the use of functions in the package to simulate
-quasispecies data. This implies the simulation of closeley related genomes,
-eventually with segregating subpopulations at higher genetic distances, and 
-their abundances. 
+In this tutorial we illustrate the use of functions in the package 
+to simulate quasispecies data. This implies the simulation of closeley
+related genomes, eventually with segregating subpopulations at higher
+genetic distances, and their abundances. 
 
-In particular we may distinguish between acute and chronic infection profiles by 
-quasispecies composition. Generally an acute infection is expected to show
-a prominent genome, highly abundant, together with a set of low abundance
-genomes. On the other hand, besides the implicit dynamics, a chronic infection is
-expected to show a number of relatively abundant genomes together with a myriad of
-derived genomes at low and very low abundances. 
+In particular we may distinguish between acute and chronic infection 
+profiles by quasispecies composition. Generally an acute infection is 
+expected to show a prominent genome, highly abundant, together with a
+set of low abundance genomes. On the other hand, besides the implicit
+dynamics, a chronic infection is expected to show a number of relatively 
+abundant genomes together with a myriad of derived genomes at low and 
+very low abundances. 
 
-In viral terms, the fitness of a genome measures its replicative performance. High
-fitness haplotypes show high abundances after a transient state overcoming other
-genomes in the quasispecies. The typical dynamics of a quasispecies, in a patient, 
-show variations in fitness for each genome caused by changes in the bioenvironment.
-Because of this dynamics we may also observe profiles of typical acute infections in
-chronic patients, at least given the level of magnification provided by current 
-NGS, which lies far below the size of the wrinkles in the quasispecies landscape.
+In viral terms, the fitness of a genome measures its replicative performance.
+High fitness haplotypes show high abundances after a transient state
+overcoming other genomes in the quasispecies. The typical dynamics of a 
+quasispecies, in a patient, show variations in fitness for each genome 
+caused by changes in the bioenvironment.Because of this dynamics we may
+also observe profiles of typical acute infections in chronic patients, 
+at least given the level of magnification provided by current  NGS, 
+which lies far below the size of the wrinkles in the quasispecies 
+landscape.
 
 A few functions in the package have been designed to simulate quasispecies
-composition, aiming at the study of statistical properties of diversity indices [@Gregori2016] [@Gregori2014]. 
+composition, aiming at the study of statistical properties of diversity 
+indices [@Gregori2016] [@Gregori2014]. 
 
 # Install package
 
@@ -73,16 +77,19 @@ library(QSutils)
 
 # Abundances
 
-Two different kinds of information define a quasispecies composition. The genomes
-and their current frequencies in the viral population. The package provides three
-functions to simulate abundances with different decreasing profiles.
+Two different kinds of information define a quasispecies composition. 
+The genomes and their current frequencies in the viral population. 
+The package provides three functions to simulate abundances with 
+different decreasing profiles.
 
 ## Powers of a fraction
 
-$fn.ab.1$ computes consecutive fractions given the frequency of the most abundant haplotype, according to: 
+$fn.ab.1$ computes consecutive fractions given the frequency of the 
+most abundant haplotype, according to: 
 
 $$h ~r^{(i-1)}, ~~ r<1, ~~ i=1..n$$
-Using $table$ on the result of $fn.ab.1$ we get the number of haplotypes for each
+Using $table$ on the result of $fn.ab.1$ we get the number of 
+haplotypes for each
 frequency:
 
 ```{r}
@@ -95,14 +102,17 @@ plot(fn.ab.1(25),type="h")
 plot(fn.ab.1(25,r=0.7),type="h")
 ```
 
-The default value for $r$ is 0.5. Higher $r$ values moderate the decrease of abundances. By default the frequency of the most abundant haplotype, $h$, is 10000. 
+The default value for $r$ is 0.5. Higher $r$ values moderate the
+decrease of abundances. By default the frequency of the most
+abundant haplotype, $h$, is 10000. 
 
 ## Power of consecutive fractions
 
 $fn.ab.2$ computes the power of consecutive fractions, according to:
 
 $$h ~ \frac{1}{i^{r}}, ~~ r>0, ~~ i=1..n$$
-Default values are 3 for $r$ and 10,000 for $h$. The higher $r$ the most pronounced the decrease in frequencies.
+Default values are 3 for $r$ and 10,000 for $h$. The higher $r$ 
+the most pronounced the decrease in frequencies.
 
 ```{r}
 table(fn.ab.2(25))
@@ -121,7 +131,7 @@ plot(fn.ab.2(25,r=2),type="h")
 
 ## Decreasing fractional powers
 
-$fn.ab.3$ computes decreasing fractional powers of the maximum frequency $h$,
+$fn.ab.3$ computes decreasing roots of the maximum frequency $h$,
 according to:
 
 $$h^{1/i},  ~~ i=1..n$$
@@ -130,14 +140,17 @@ table(fn.ab.3(25))
 ```
 
 
-```{r,fig.cap="Simulated abundances with `fn.ab.3`"}
+```{r,fig.cap="Simulated abundances with `fn.ab.3`",out.width = '70%'}
 par(mfrow=c(1,2))
 plot(fn.ab.3(25),type="h")
 ```
 
-Both, the figure and the previous table show that this function is the one that generates more distance among the dominant haplotype and the others. 
+Both, the figure and the previous table show that this function
+is the one that generates more distance among the dominant
+haplotype and the others. 
 
-To compare the profiles of the three functions this figure plots the outputs of the functions with default parameters. 
+To compare the profiles of the three functions this figure 
+plots the outputs of the functions with default parameters. 
 
 ```{r,fig.cap="Comparison of the data simulation functions"}
 par(mfrow=c(1,3))
@@ -146,7 +159,8 @@ plot(fn.ab.2(25),type="h",main="fn.ab.2")
 plot(fn.ab.3(25),type="h",main="fn.ab.3")
 ```
 
-A linear combination of results of the three functions provides greater flexibility.
+A linear combination of results of the three functions provides
+greater flexibility.
 
 ```{r}
 ab <- 0.25*fn.ab.1(25)+0.75*fn.ab.2(25)
@@ -166,18 +180,19 @@ plot(ab,type="h",main="Linear combination of results")
 ```
 
 
-## Geometric series
+## Geometric sequence
 
-The frequencies of long queus of very low fitness or defective haplotypes,
-along with those originated by technical errors, are best simulated with
-a geometric series with low values of the parameter. The geometric series 
-is expressed as:
+The typical rare haplotypes load observed in our experiments with HCV 
+quasispecies, previously to the abundance filter, that is the big number of 
+very low fitness or defective haplotypes, are best simulated by a geometric 
+sequence with low values of the parameter. The geometric sequence is expressed 
+as:
 
-$$p ~(1-p)^{i-1},  ~~ i=1..n$$
+$$p ~(1-p)^{k-1},  ~~ k=1..n,  ~~ 0 < p < 1$$
 
-and is implemented in function $geom.series$, taking two arguments,
-$n$ the number of frequencies to compute, and $p$ the parameter of 
-the geometric function.
+and is implemented in function $geom.series$, taking two arguments, $n$ the 
+number of frequencies to compute, and $p$ the parameter of the geometric 
+function.
 
 This function is usefull to simulate a broad spectrum of frequency profiles,
 from quasispecies with very prevalent haplotypes to the mentioned long queus
@@ -192,7 +207,7 @@ plot(ab2,type="h",main="Geometric series with p=0.001",ylim=c(0,max(ab2)),
     cex.main=1)
 ```
 
-Linear combinations of geometric series with parameters of different 
+Linear combinations of geometric sequences with parameters of different
 magnitude help to obtain typical quasispecies profiles:
 
 ```{r}
@@ -203,16 +218,17 @@ plot(ab1,type="h",main="Combination of geometric series")
 Functions $fn.ab.1$, $fn.ab.2$ and $fn.ab.3$ are flexible enough to
 obtain typical profiles of quasispecies after filtering out all 
 haplotypes below an abundance threshold, considered the technical 
-noise level. These functions combined with  geometric series of low 
+noise level. These functions combined with geometric series of low 
 to very low parameter values provide profiles close to those observed 
 empirically.
 
 # Random genomes and variant haplotypes
 
 
-Next to frequencies we need the simulate the quasispecies genomes. The first task 
-is generating the dominant haplotype by $GetRandomSeq$. The only parameter to this
-function is the genome length. The output is a fully random sequence of nucleotides
+Next to frequencies we need the simulate the quasispecies genomes. 
+The first task is generating the dominant haplotype by
+$GetRandomSeq$. The only parameter to this function is the genome 
+length. The output is a fully random sequence of nucleotides 
 returned as a character string.
 
 ```{r}
@@ -221,10 +237,12 @@ m1 <- GetRandomSeq(50)
 m1
 ```
 
-Variant genomes of this haplotype may be generated by $GenerateVars$. This function
-takes four parameters, $seq$ the dominant haplotype, $nhpl$ the number of variants
-to generate, $max.muts$ the maximum number of mutations in a genome, and $p.muts$
-the probabilities for each number of mutations from 1 to $max.muts$. It returns a vector of character strings with the variant genomes.
+Variant genomes of this haplotype may be generated by
+$GenerateVars$. This function takes four parameters, $seq$ the 
+dominant haplotype, $nhpl$ the number of variants to generate,
+$max.muts$ the maximum number of mutations in a genome, and $p.muts$
+the probabilities for each number of mutations from 1 to $max.muts$. 
+It returns a vector of character strings with the variant genomes.
 
 ```{r}
 v1 <- GenerateVars(m1,20,2,c(10,1))
@@ -234,9 +252,10 @@ DottedAlignment(c(m1,v1))
 
 ## Generate a quasispecies of an acute  infection
 
-With these functions we may simulate a quasispecies with a profile of acute
-infection, that is characterized by a dominant haplotype which is fairly abundant
-together with a number of haplotypes at low abundances.
+With these functions we may simulate a quasispecies with a 
+profile of acute infection, that is characterized by a dominant
+haplotype which is fairly abundant together with a number of 
+haplotypes at low abundances.
 
 
 ```{r}
@@ -248,9 +267,10 @@ w1 <- fn.ab.2(n.genomes)
 data.frame(Hpl=DottedAlignment(c(m1,v1)),Freq=w1)
 ```
 
-A quasispecies composition may be visualized by a barplot of haplotype frequencies,
-with haplotipes sorted by increasing number of mutations with respect to the
-dominant haplotype, and within number of mutations by decreasing order of abundance:
+A quasispecies composition may be visualized by a barplot of 
+haplotype frequencies, with haplotipes sorted by increasing number 
+of mutations with respect to the dominant haplotype, and within 
+number of mutations by decreasing order of abundance:
 
 ```{r,fig.cap="Simulated abundances of an accute infection"}
 qs <- DNAStringSet(c(m1,v1))
