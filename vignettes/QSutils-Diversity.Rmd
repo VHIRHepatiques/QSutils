@@ -312,7 +312,7 @@ D
 
     ```{r}
     nm <- nmismatch(pairwiseAlignment(lst$hseqs,lst$hseqs[1]))
-    MutationFreq(nm,lst$nr,len=width(lst$hseqs)[1])
+    MutationFreq(nm=nm,nr=lst$nr,len=width(lst$hseqs)[1])
     ```
 
     The proportion of different nucleotides at the molecular level, _Mfm_,
