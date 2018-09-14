@@ -1,7 +1,7 @@
-﻿\name{ReadAmplSeqs}
+\name{ReadAmplSeqs}
 \alias{ReadAmplSeqs}
 \title{
-Read fasta file with haplotypes and frequencies.
+Read a fasta file with haplotypes and frequencies
 }
 \description{
 Loads an alignment of haplotypes and their frequencies from a fasta file.
@@ -12,20 +12,20 @@ ReadAmplSeqs(flnm,type="DNA")
 \arguments{
     \item{flnm}{
 File name of a fasta file with haplotype sequences and their frequencies. 
-The header of each haplotype in the fasta file is composed of an ID followed 
-by a vertical bar '|' followed by the read counts, and eventually followed by
-another vertical bar and additional information (i.e. Hpl.2.0001|15874|25.2).
+The header of each haplotype in the fasta file is composed of an ID followed by
+a vertical bar "|" followed by the read count, and eventually followed by 
+another vertical bar and additional information (eg, Hpl.2.0001|15874|25.2).
 }
     \item{type}{
-Character string specifying the type of the sequences in the fasta file.
-This must be one of "DNA" or "AA". It is "DNA" by default.
+Character string specifying the types of sequences in the fasta file. This must
+be either "DNA" or "AA". It is "DNA" by default.
 }
 }
 \value{
 Returns a list with two elements:
-\item{nr}{Vector of the haplotype counts. }
+\item{nr}{Vector of the haplotype counts.}
 \item{hseqs}{DNAStringSet or AAStringSet with the haplotype DNA sequences or 
-the amino acid sequences.}
+amino acid sequences.}
 }
 \references{
 
@@ -44,7 +44,7 @@ Mar 20. PubMed PMID: 23523552.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{

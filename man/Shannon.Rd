@@ -1,16 +1,17 @@
-﻿\name{Shannon}
+\name{Shannon}
 \alias{Shannon}
 \alias{ShannonVar}
 \alias{NormShannon}
 \alias{NormShannonVar}
 \title{
-Set of functions to compute Shannon entropy.
+Set of functions to compute Shannon entropy
 }
 \description{
 \code{Shannon} computes the Shannon entropy. 
 \code{NormShannon} returns the normalized Shannon entropy. 
 \code{ShannonVar} computes the Shannon entropy asymptotic variance. 
-\code{NormShannonVar} the normalized Shannon entropy asymptotic variance.
+\code{NormShannonVar} computes the normalized Shannon entropy asymptotic 
+variance.
 }
 \usage{
 Shannon(w)
@@ -37,7 +38,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \examples{

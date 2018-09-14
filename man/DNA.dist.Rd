@@ -1,12 +1,13 @@
 \name{DNA.dist}
 \alias{DNA.dist}
 \title{
-Matrix of DNA distances given an alignment.
+Matrix of DNA distances given an alignment
 }
 \description{
-Function to compute a matrix of pairwise distances from DNA sequences 
-using a model of DNA evolution. It relies on function 
-\code{dist.dna()} in package ape.
+Function to compute a matrix of pairwise distances from DNA sequences using a 
+model of DNA evolution. It relies on the \code{dist.dna()} function in the
+APE package.
+
 }
 \usage{
 DNA.dist(seqs, model = "raw", gamma = FALSE, pairwise.deletion = FALSE)
@@ -16,23 +17,20 @@ DNA.dist(seqs, model = "raw", gamma = FALSE, pairwise.deletion = FALSE)
 DNAStringSet object with the aligned haplotypes.
 }
     \item{model}{
-Evolutionary model to compute genetic distance, by default "raw", but 
-also can be used "N", "TS", "TV", "JC69", "K80", "F81", "K81", "F84", 
-"BH87", "T92", "TN93", "GG95", "logdet", "paralin", "indel", 
-or "indelblock".
+Evolutionary model to compute genetic distance by default "raw", but "N", "TS",
+"TV", "JC69", "K80", "F81", "K81", "F84", "BH87", "T92","TN93", "GG95", 
+"logdet", "paralin", "indel", or "indelblock" can also be used.
 }
     \item{gamma}{
-Gamma parameter possibly used to apply a correction to the distances or 
-FALSE (by default).
+Gamma parameter possibly used to apply a correction to the distances or FALSE 
+(by default).
 }
     \item{pairwise.deletion}{
-A logical indicating whether to delete the sites with missing data
-(gaps) in a pairwise way. The default is to delete the sites with at 
-least one missing data for all sequences 
+A logical indicating whether to delete sites with missing data (gaps) in a 
+pairwise manner. The default is to delete sites with at least one missing 
+datum  in all sequences.
 }
 }
-
-
 \value{
 Object of class "dist" with pairwise distances. 
 }
@@ -51,7 +49,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111.
 Epub 2014 Jan 2. PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link[ape]{dist.dna}}

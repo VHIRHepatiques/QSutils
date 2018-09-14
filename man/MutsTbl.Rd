@@ -1,11 +1,11 @@
-﻿\name{MutsTbl}
+\name{MutsTbl}
 \alias{MutsTbl}
 \title{
-Table of mutation frequencies by position.
+Table of mutation frequencies by position
 }
 \description{
-Computes the table of mutation frequencies by position with respect to 
-the alignment consensus.
+Computes the table of mutation frequencies by position with respect to the 
+alignment consensus.
 }
 \usage{
 MutsTbl(hseqs,nr=NULL)
@@ -15,14 +15,14 @@ MutsTbl(hseqs,nr=NULL)
 DNAStringSet or AAStringSet with the aligned haplotype sequences.
 }
     \item{nr}{
-An optional numeric vector with the haplotype counts to be used to take 
-into account the haplotype frequencies. When \code{nr} is NULL the same 
-weight is given to each haplotype.
+An optional numeric vector with the haplotype counts. When \code{nr} is NULL,
+the same weight is given to each haplotype.
 }
 }
 \value{
-Matrix of counts of mutations by position.
-A (4 x n) or (20 x n) matrix, where n is the alignment length.
+Matrix of mutation counts by position. A (4 x n) or (20 x n) matrix, 
+where n is the alignment length.
+
 
 }
 \references{
@@ -36,7 +36,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{
@@ -46,9 +46,9 @@ Josep Gregori and Mercedes Guerrero
 # Load the haplotypes alignment with abundances.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
-# Table of mutations in the alignemnt regardless of abundances.
+# Table of mutations in the alignment, regardless of haplotype abundance. 
 MutsTbl(lst$hseqs)
 
-# Table of mutations taking into account haplotype abundances
+# Table of mutations taking into account abundance.
 MutsTbl(lst$hseqs,lst$nr)
 }

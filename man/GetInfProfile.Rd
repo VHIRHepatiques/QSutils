@@ -1,26 +1,26 @@
 \name{GetInfProfile}
 \alias{GetInfProfile}
 \title{
-Information contents profile of an alignment
+Information content profile of an alignment
 }
 \description{
 GetInfProfile computes the information content at each position of an 
-alignment. 
+alignment.
 }
 \usage{
 GetInfProfile(seqs,nr=NULL)
 }
 \arguments{
     \item{seqs}{
-DNAStringSet or AAStringSet with the haplotypes alignment.
+DNAStringSet or AAStringSet with the haplotype alignment.
 }
     \item{nr}{
-An optional numeric vector with the haplotype counts to take into account 
-the haplotype frequencies.
+An optional numeric vector with the haplotype counts to take into account the 
+information content of each position in the alignment.
 }
 }
 \value{
-Returns a numeric vector of length equal to the length of the alignment. 
+Returns a numeric vector whose length is equal to the length of the alignment.
 Each value corresponds to the information content of each position in 
 the alignment.
 }
@@ -35,16 +35,16 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \examples{
 
-# Load the alignment
+# Load the alignment.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 # Compute the alignment's IC profile.
 GetInfProfile(lst$hseqs)
-# Taking also into account haplotype frequencies.
+# Also taking into account haplotype frequencies.
 GetInfProfile(lst$hseqs,lst$nr)
 }

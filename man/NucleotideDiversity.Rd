@@ -1,30 +1,29 @@
-﻿\name{NucleotideDiversity}
+\name{NucleotideDiversity}
 \alias{NucleotideDiversity}
 \title{
-Nucleotide diversity.
+Nucleotide diversity
 }
 \description{
-Computes the mean pairwise genetic distance among sequences in the 
-alignemnt.
+Computes the mean pairwise genetic distance between sequences in the alignment.
 }
 \usage{
 NucleotideDiversity(dst,w=NULL)
 }
 \arguments{
     \item{dst}{
-A "dist" object or a symmetric matrix with haplotype pairwise distances 
-(i.e the output of DNA.dist).
+A "dist" object or a symmetrical matrix with haplotype pairwise distances
+(ie,  the output of DNA.dist).
+
 }   
     \item{w}{
-An optional numeric vector with the haplotype counts to be used to take 
-into account the haplotype frequencies. When \code{w} is NULL the same 
-weight is given to each haplotype, and the nucleotide diversity at the
-entity level is computed.
+An optional numeric vector with the haplotype counts. When \code{w} is NULL,
+the same weight is given to each haplotype, and nucleotide diversity is 
+computed at the entity level.
 }
 }
 \value{
-A value that corresponds to the nucleotide diversity, either by entity 
-or abundance depending on argument \code{w}.
+A value that corresponds to the nucleotide diversity, either by entity or 
+abundance, depending on argument \code{w}.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -37,19 +36,20 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{
 \code{\link{DNA.dist}}, \code{\link{ReadAmplSeqs}}
 }
 \examples{
-# Load haplotypes alignment with abundances.
+# Load haplotype alignment with abundances.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
-# Compute the DNA distances matrix.
+# Compute the DNA distance matrix. 
 dst <- DNA.dist(lst$hseqs,model="K80")
 
-NucleotideDiversity(dst, lst$nr)
+NucleotideDiversity(dst, lst$nr) 
 NucleotideDiversity(dst)
+
 }

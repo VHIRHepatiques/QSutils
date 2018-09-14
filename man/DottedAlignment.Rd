@@ -1,12 +1,12 @@
 \name{DottedAlignment}
 \alias{DottedAlignment}
 \title{
-Aligns the haplotypes into a dotted alignment. 
+Align haplotypes into a dotted alignment
 }
 \description{
-Given an alignment, takes the first sequence as reference, and turns all
-equivalences in the alignment as dots, leaving just the variants with respect to
-the reference.
+Given an alignment, it takes the first sequence as reference, and depicts
+all equivalences in the alignment as dots, leaving only the variants with 
+respect to the reference.
 }
 \usage{
 DottedAlignment(hseqs)
@@ -18,10 +18,10 @@ DNAStringSet or AAStringSet with haplotype sequences.
 }
 \value{
 A character string vector of the alignment, with dots in the 
-conserved positions. 
+conserved positions.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{
@@ -31,6 +31,6 @@ Josep Gregori and Mercedes Guerrero
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 strs <- DottedAlignment(lst$hseqs)
 
-#Create a data frame to visualize the result.
+# Create a data frame to visualize the result.
 data.frame(Hpl=strs,stringsAsFactors=FALSE)
 }

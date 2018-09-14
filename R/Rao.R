@@ -1,6 +1,6 @@
 Rao <-
-function(dst, w=NULL){ 
-    if(class(dst)!="dist" & class(dst)!="matrix") 
+function(dst, w=NULL){
+    if(class(dst)!="dist" & class(dst)!="matrix")
     stop("The input object must be of dist or matrix class \n")
     if (is.null(w)) w<- rep(1,ncol(dst))
     D <- as.matrix(dst)

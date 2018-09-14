@@ -1,12 +1,12 @@
-﻿\name{SegSites}
+\name{SegSites}
 \alias{SegSites}
 \title{
-Computes the number of segregating sites.
+Compute the number of segregating sites
 }
 \description{
-Computes the number of segregating (polymorphic) sites given an alignment. 
-That is, the number of sites with more than a single nucleotide or 
-amino acid in the alignment.
+Computes the number of segregating (polymorphic) sites in a given alignment.
+That is, the number of sites with more than a single nucleotide or amino acid 
+in the alignment.
 }
 \usage{
 SegSites(seqs)
@@ -30,7 +30,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{ReadAmplSeqs}}

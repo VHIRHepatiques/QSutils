@@ -4,13 +4,13 @@
 \alias{RaoPow}
 \alias{RaoPowProfile}
 \title{
-Functions to compute Rao's entropy.
+Functions to compute Rao’s entropy
 }
 \description{
-Set of functions to estimate the functional Rao entropy. 
-\code{Rao} calculates the Rao's entropy, \code{RaoVar} the variance of the Rao
-estimator, \code{RaoPow} the Rao entropy of order q, and \code{RaoPowProfile} 
-the functional Rao entropy profile for the given set of exponents.
+Set of functions to estimate Rao’s functional entropy. \code{Rao} calculates 
+the Rao entropy, \code{RaoVar} the variance of the Rao estimator, \code{RaoPow} 
+the Rao entropy of order q, and \code{RaoPowProfile}  the functional Rao 
+entropy profile for the given set of exponents.
 }
 \usage{
 Rao(dst, w=NULL)
@@ -21,24 +21,21 @@ RaoPowProfile(dst,w=NULL,q=NULL)
 
 \arguments{
     \item{dst}{
-A "dist" object, the output of DNA.dist function.
+A "dist" object, output of the DNA.dist function.
 }
     \item{w}{
-An optional numeric vector with the haplotype counts to be used to take into
-account the haplotype frequencies. When \code{w} is NULL the same weight is 
-given to each haplotype.
+An optional numeric vector with the haplotype counts. When \code{w} is NULL 
+the same weight is given to each haplotype.
 }
     \item{q}{
 Exponent. A single value for \code{Rao}, \code{RaoVar} and \code{RaoPow}. 
-A vector of values for \code{RaoPowProfile}.
-The default value for \code{RaoPowProfile} is a set of exponents to obtain a
-smooth profile.
+A vector of values for \code{RaoPowProfile}. The default value for 
+\code{RaoPowProfile} is a set of exponents to obtain a smooth profile.    
 }
 }
 \value{
-A single value for \code{Rao}, \code{RaoVar} and \code{RaoPow}.
-A vector of values for \code{RaoPowProfile} corresponding to each exponent 
-in vector q.
+A single value for \code{Rao}, \code{RaoVar} and \code{RaoPow}. A vector of 
+values for \code{RaoPowProfile} corresponding to each exponent in vector q.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -54,14 +51,14 @@ Pavoine, S. (2005). Méthodes statistiques pour la mesure de la biodiversité.
 UMR CNRS 5558 «Biométrie et Biologie Evolutive».
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{DNA.dist}}, \code{\link{ReadAmplSeqs}}
 }
 \examples{
 
-# Load haplotypes alignment with abundances.
+# Load haplotype alignment with abundances.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 # DNA pairwise distances.
 dst <- DNA.dist(lst$hseqs,model="N")

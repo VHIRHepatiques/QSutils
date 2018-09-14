@@ -1,11 +1,11 @@
-﻿\name{SummaryMuts}
+\name{SummaryMuts}
 \alias{SummaryMuts}
 \title{
-Distribution of nucleotides or amino acids in polymorphic sites.
+Distribution of nucleotides or amino acids in polymorphic sites
 }
 \description{
-Computes the nucleotide or amino acid frequencies in all 
-polymorphic sites in the alignment.
+Computes the nucleotide or amino acid frequencies at all polymorphic sites 
+in the alignment.
 }
 \usage{
 SummaryMuts(seqs, w = NULL, off = 0)
@@ -15,9 +15,8 @@ SummaryMuts(seqs, w = NULL, off = 0)
 DNAStringSet or AAStringSet with the haplotype sequences.
 }
     \item{w}{
-An optional numeric vector with the haplotype counts to be used to take 
-into account the haplotype frequencies. When \code{w} is NULL a vector
-of ones is taken as default.
+An optional numeric vector with the haplotype counts. When \code{w} is NULL,
+a vector of ones is taken as default.
 }
     \item{off}{
 Offset of first position in the alignment.
@@ -45,16 +44,16 @@ Mar 20. PubMed PMID: 23523552.
 }
 
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
 
-# Load haplotypes alignment with abundances.
+# Load haplotype alignment with abundances.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
-# Distribution of nucleotides in polymorphic sites.
+# Distribution of nucleotides at polymorphic sites.
 SummaryMuts(lst$hseqs,lst$nr,off=0)
 }

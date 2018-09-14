@@ -1,11 +1,11 @@
-﻿\name{SortByMutations}
+\name{SortByMutations}
 \alias{SortByMutations}
 \title{
-Sorts haplotypes by mutations and abundance.
+Sort haplotypes by mutations and abundance
 }
 \description{
-Sorts and renames the haplotypes by the number of mutations with 
-respect to the dominant haplotype, and by abundance.
+Sorts and renames haplotypes by the number of mutations with respect to the 
+dominant haplotype, and by abundance.
 }
 \usage{
 SortByMutations(bseqs, nr)
@@ -19,20 +19,20 @@ Vector with the haplotype counts.
 }
 }
 \details{
-The haplotypes are pairwise aligned to the dominant haplotype and then sorted
-first by decreasing order in the number of differences with respect to the
-dominant haplotype, and second by decreasing order of abundances. As a result
-the haplotypes are renamed according to the pattern \code{Hpl.n.xxxx}, 
-where \code{n} represents the number of differences, and \code{xxxx} the
-abundance order within mutation number.
+The haplotypes are pairwise-aligned to the dominant haplotype and then sorted: 
+first, by decreasing order of the number of differences with respect to the
+dominant haplotype, and second, by decreasing order of abundance. As a result, 
+haplotypes are renamed according to the pattern \code{Hpl.n.xxxx}, where 
+\code{n} represents the number of differences, and \code{xxxx} the abundance
+order within the mutation number.
 }
 
 \value{
 Returns a list with three elements.
 \item{bseqs}{DNAStringSet or AAStringSet with the haplotype sequences.}
 \item{nr}{Vector of the haplotype counts.}
-\item{nm}{Vector of the number of differences of each haplotype with respect 
-to the dominant haplotype.}
+\item{nm}{Vector of the number of differences of each haplotype with respect to 
+the dominant haplotype.}
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -45,14 +45,14 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
 
-# Load haplotypes alignment with abundances.
+# Load haplotype alignment with abundances.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
 SortByMutations(lst$hseq,lst$nr)

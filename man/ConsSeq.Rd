@@ -1,10 +1,10 @@
 \name{ConsSeq}
 \alias{ConsSeq}
 \title{
-Consensus sequence given an alignment and frequencies.
+Consensus sequence given an alignment and frequencies
 }
 \description{
-ConsSeq determines the consensus sequence from a set of hapotypes.
+ConsSeq determines the consensus sequence from a set of haplotypes.
 }
 \usage{
 ConsSeq(seqs, w=NULL)
@@ -18,15 +18,15 @@ An optional numeric vector with the haplotype counts.
 }
 }
 \details{
-The most frequent nucleotide or amino acid at each position is taken. 
-No ambiguity IUPAC codes are considered; in case of ties the consensus
-is decided randomly.
+The most frequent nucleotide or amino acid at each position is taken. No 
+IUPAC ambiguity codes are considered; in the case of ties, the consensus
+nucleotide is decided randomly.
 }
 \value{
 Character vector with the consensus sequence.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{ReadAmplSeqs}}

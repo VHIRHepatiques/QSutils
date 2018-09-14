@@ -1,10 +1,10 @@
 \name{GenerateVars}
 \alias{GenerateVars}
 \title{
-Generate variants of a given haplotype.
+Generate variants of a given haplotype
 }
 \description{
-Function to generate a set of variants for a given DNA sequence. 
+Function to generate a set of variants for a given DNA sequence.
 }
 \usage{
 GenerateVars(seq, nhpl, max.muts, p.muts)
@@ -20,23 +20,25 @@ Number of haplotypes to generate.
 Maximum number of mutations in each sequence.
 }
     \item{p.muts}{
-Vector of length \code{max.muts} with the probability of each number of 
+Vector of length  \code{max.muts} with the probability of each number of 
 mutations, some of which may be 0.
 }
 }
 \details{
+
 Given a DNA sequence, \code{nhpl} variant haplotypes are generated at random, 
-with a maximum of \code{max.muts} substitutions each. The probability in the
-number of mutations in each haplotype generated is given by the vector 
-\code{p.muts}. The positions of the mutations in each haplotype are 
-independent and random.
+with a maximum of \code{max.muts} substitutions each. The probability of the 
+number of mutations in each haplotype generated is given by the vector
+\code{p.muts}. The positions of the mutations in each haplotype are independent 
+and random.
+
 }
 \value{
 A character vector with \code{nhpl} haplotype variants of the \code{seq} 
-sequence. 
+sequence.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{

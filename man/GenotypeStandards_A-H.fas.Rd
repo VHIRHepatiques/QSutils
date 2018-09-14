@@ -2,17 +2,17 @@
 \alias{GenotypeStandards_A-H.fas}
 \docType{data}
 \title{
-Genotype Standards of Hepatitis virus.  
+Genotype standards of hepatitis B virus
 }
 \description{
-Fasta file with the references to genotype sequences of hepatitis
-virus into the 8 known haplotypes. For more details see the 
-QSutils vignette: \code{vignette("QSutils", package = "QSutils")}
+Fasta file with a set of well characterized sequences belonging to each 
+HBV genotype. See the QSutils vignette:
+\code{vignette("QSutils", package = "QSutils")}.
 }
 \format{
-Fasta file, each sequence starts with te symbol ">" followed by the 
-ID of the sequence. Subsequent lines correspond to the nucleotide 
-sequences or peptide sequences.
+Fasta file format. Each sequence starts with the symbol ">" followed by 
+the sequence ID. Subsequent lines correspond to the nucleotide sequences or 
+peptide sequences.
 }
 \seealso{
 \code{\link{DBrule}}

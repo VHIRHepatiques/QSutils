@@ -1,7 +1,7 @@
-﻿\name{TotalMutations}
+\name{TotalMutations}
 \alias{TotalMutations}
 \title{
-Number of Mutations.
+Number of Mutations
 }
 \description{
 \code{TotalMutations} computes the number of mutations in the alignment.
@@ -14,15 +14,15 @@ TotalMutations(hseqs,w)
 DNAStringSet or AAStringSet with the haplotype sequences.
 }
     \item{w}{
-An optional numeric vector with the haplotype counts to be used to compute
-the total number of mutations in the population, that is, taking into 
-account haplotype abundances. When \code{w} is NULL a vector of ones 
-is taken as default.
+An optional numeric vector with the haplotype counts used to compute the 
+total number of mutations in the population, that is, taking into account
+haplotype abundances. When \code{w} is NULL, a vector of ones is taken as 
+default.
 }
 }
 \value{
-A value corresponding to the number of mutations. Note that the wild 
-type is decided taking \code{w} into account.
+A value corresponding to the number of mutations. Note that the wild-type is 
+decided taking \code{w} into account.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -35,7 +35,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{SegSites}}

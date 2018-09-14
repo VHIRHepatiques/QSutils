@@ -2,12 +2,12 @@
 \alias{Collapse} 
 \alias{Recollapse}
 \title{
-Collapse reads into haplotypes and frequencies.
+Collapse reads into haplotypes and frequencies
 }
 \description{
 Collapse summarizes aligned reads into haplotypes with their frequencies. 
-Recollapse is used to update the collapse after some maniputalion which 
-could result in duplicate haplotypes.
+Recollapse is used to update the collapse after some type of manipulation 
+may have resulted in duplicate haplotypes.
 }
 \usage{
 Collapse(seqs)
@@ -22,14 +22,13 @@ Vector with the haplotype counts.
 }
 }
 \details{
-Recollapse is used when after some manipulation different haplotypes 
-might result equivalent. It removes duplicate sequences and updates their
-frequencies.
+Recollapse is used when haplotypes may become equivalent after some type of 
+manipulation. It removes duplicate sequences and updates their frequencies.
 }
 \value{
 Collapse and Recollapse return a list with two elements.
-\item{nr}{Vector of the haplotype counts }
-\item{hseqs}{DNAStringSet or AAStringSet with the haplotype sequences}
+\item{nr}{Vector of the haplotype counts.}
+\item{hseqs}{DNAStringSet or AAStringSet with the haplotype sequence.}
 }
 \references{
 
@@ -47,13 +46,19 @@ using hepatitis B virus infection as a model. Antiviral Res.
 20. PubMed PMID: 23523552.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \examples{
-\dontrun{
-
-haplo<-Collapse(seqs)
-
-# Recollapse haplotypes after translation.
-Recollapse(translate(haplo),nr)
-}}
+# Load raw reads.
+reads <- readDNAStringSet("QSutils/extdata/Toy.GapsAndNs.fna")
+# Collapse this reads into haplotypes
+lstCollapsed <- Collapse(reads)
+lstCorrected<-CorrectGapsAndNs(lstCollapsed$hseqs[2:length(lstCollapsed$hseqs)],
+                lstCollapsed$hseqs[[1]])
+#Add again the most abundant haplotype.
+lstCorrected<- c(lstCollapsed$hseqs[1],lstCorrected)
+lstCorrected
+# Recollapse the corrected haplotypes
+lstRecollapsed<-Recollapse(lstCorrected,lstCollapsed$nr)
+lstRecollapsed
+}

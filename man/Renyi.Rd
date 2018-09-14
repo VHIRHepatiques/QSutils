@@ -1,12 +1,11 @@
-﻿\name{Renyi}
+\name{Renyi}
 \alias{Renyi}
 \alias{RenyiProfile}
 \title{
-Renyi profiles.
+Rényi profiles
 }
 \description{
-Functions to compute the Rényi entropy given a vector of counts of a set of 
-haplotypes. 
+Functions to compute the Rényi entropy given a vector of counts 
 \code{RenyiProfile} computes the Rényi number for a set of exponents.
 }
 \usage{
@@ -18,13 +17,13 @@ RenyiProfile(w, q = NULL)
 Vector of observed counts or frequencies.
 }
     \item{q}{
-Exponent. A single value for \code{Renyi}, a vector of values or NULL for
-\code{RenyiProfile}.
+Exponent. A single value for  \code{Renyi}, a vector of values or NULL for
+\code{RenyiProfile}.    
 }
 }
 \value{
-A single value for \code{Renyi}. A data frame with exponents and entropies for
-\code{RenyiProfile}.
+A single value for \code{Renyi}. A data frame with exponents and entropies 
+for \code{RenyiProfile}.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -40,7 +39,7 @@ Pavoine, S. (2005). Méthodes statistiques pour la mesure de la biodiversité.
 UMR CNRS 5558 «Biométrie et Biologie Evolutive».
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{Hill}}, \code{\link{HCq}}

@@ -1,11 +1,11 @@
 \name{fn.ab.2}
 \alias{fn.ab.2}
 \title{
-Vector of abundances by a power of decreasing fractions.
+Vector of abundances by a power of decreasing fractions
 }
 \description{
-Function to simulate haplotype abundances of quasispecies by 
-a power of decreasing fractions.
+Function to simulate haplotype abundances in the quasispecies by a power of 
+decreasing fractions.
 }
 \usage{
 fn.ab.2(n, h = 10000, r = 3)
@@ -15,25 +15,26 @@ fn.ab.2(n, h = 10000, r = 3)
 Number of counts to compute.
 }
     \item{h}{
-Higher value for the counts.
+Highest abundance value.
 }
     \item{r}{
-The power of the function. A value bigger than 0, usually 
+The power of the function. A value larger than 0, usually 
 in the range \code{0.5 < r < 4}.
 }
 }
 \details{
-The abundances, as counts, are computed according to the 
-following equation, taking the integer part:
+The abundances, as counts, are computed according to the following equation,
+taking the integer part:
 \deqn{max(h ~ \left( \frac{1}{i} \right) ^r,1); ~~ r>0; ~~i=1..n}
-The higher \code{r} the faster the decrease in abundances.
+The higher \code{r,} the faster the decrease in abundances.
 }
 \value{
-Numeric vector with \code{n} decreasing counts, where the
-first element equals \code{h}, and no element is lower than 1.
+Numeric vector with \code{n} decreasing counts, where the first element equals 
+\code{h} and no element is lower than 1.
+
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{fn.ab.1}}, \code{\link{fn.ab.3}}, 

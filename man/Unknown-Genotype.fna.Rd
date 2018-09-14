@@ -2,16 +2,19 @@
 \alias{Unknown-Genotype.fna}
 \docType{data}
 \title{
-Fasta file with reads of unknown genotype. 
+Fasta file with reads of unknown genotype
 }
 \description{
-Fasta file of sequenced hepatitis virus of unknown genotype. This is toydata 
-to simulate the genotyping of a sequence with the package \code{QSutils}. 
+Fasta file with hepatitis B virus sequences of unknown genotype. This is used 
+to illustrate the genotyping of HBV sequences with the \code{QSutils} package.
+
 }
 \format{
-Fasta file, each sequence starts with te symbol ">" followed by the ID of 
-the sequence. Subsequent lines correspond to the nucleotide sequences or 
+Fasta file format. Each sequence starts with the symbol ">" followed by 
+the sequence ID. Subsequent lines correspond to the nucleotide sequences or
 peptide sequences.
+
+
 }
 \seealso{
 \code{\link{DBrule}}

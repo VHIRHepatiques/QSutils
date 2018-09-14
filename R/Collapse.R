@@ -1,5 +1,5 @@
 Collapse <-
-function(seqs){ 
+function(seqs){
     cls <- class(seqs)
     sqtbl <- sort(table(as.character(seqs)),decreasing=TRUE)
     seqs <- names(sqtbl)

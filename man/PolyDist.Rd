@@ -1,12 +1,12 @@
-﻿\name{PolyDist}
+\name{PolyDist}
 \alias{PolyDist}
 \title{
-Fraction of substitutions by polymorfic site.
+Fraction of substitutions by polymorphic site
 }
 \description{
-Computes the fraction of substitutions in each polymorphic site. 
-The wild type base is taken as the most abundant at each site, 
-taking into account the weigths \code{w}.
+Computes the fraction of substitutions at each polymorphic site. The wild-type
+base is taken as the most abundant at each site, taking into account the 
+weights, \code{w}.
 }
 \usage{
 PolyDist(seqs,w=NULL)
@@ -16,14 +16,13 @@ PolyDist(seqs,w=NULL)
 DNAStringSet or AAStringSet with the haplotype sequences.
 }
     \item{w}{
-An optional numeric vector with the haplotype counts to be used to 
-take into account the haplotype frequencies. When \code{w} is NULL 
-the same weight is given to each haplotype. 
+An optional numeric vector with the haplotype counts. When \code{w} is NULL, 
+the same weight is given to each haplotype.
 }
 }
 \value{
-Vector of numbers corresponding to the fraction of substitutions in 
-polymorphic sites. Note that the wild type depends also of \code{w}. 
+Vector of numbers corresponding to the fraction of substitutions at polymorphic
+sites. Note that the wild type also depends on \code{w}.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -36,7 +35,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{
@@ -44,9 +43,10 @@ Josep Gregori and Mercedes Guerrero
 }
 \examples{
 
-# Load haplotypes alignment with abundances.
+# Load haplotype alignment with abundances.
 lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
-PolyDist(lst$hseqs)
+PolyDist(lst$hseqs) 
 PolyDist(lst$hseqs,lst$nr)
+
 }

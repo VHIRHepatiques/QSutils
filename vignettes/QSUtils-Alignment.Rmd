@@ -1,0 +1,362 @@
+---
+title: "Quasispecies Data"
+author: "Guerrero-Murillo, M and Gregori, J"
+date: "`r format(Sys.Date(), '%m/%d/%Y')`"
+bibliography: alignment.bib
+output:
+    BiocStyle::html_document:
+        number_sections: yes
+        toc_float: true
+vignette: >
+    %\VignetteIndexEntry{Vignette Title}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Intro
+The viral quasispecies is currently defined as a collection of closely related
+viral genomes undergoing a continuous process of genetic variation, competition
+between the variants generated, and selection of the fittest genomes in a given
+environment.  [@Domingo2012]
+
+The high replication error rate that generates this quasispecies is due to a
+lack of genetic proofreading mechanisms, and it is estimated that for viruses
+with typically high replicative rates, every possible point mutation and many
+double mutations are generated with each viral replication cycle, and these may
+be present within the population at any time. 
+
+Quasispecies complexity can explain or predict the behavior of a virus; hence,
+it has an obvious interest for clinical reasons. We are often interested in 
+comparing the viral diversity indices between sequential samples from a single
+patient or between samples from different groups of patients. These comparisons
+can provide information on the patient’s clinical progression or the 
+appropriateness of a given treatment. [@Gregori2016] [@Gregori2014]
+
+QSUtils is a package intended for use with quasispecies amplicon data obtained
+by NGS, but it could also be useful for analyzing 16S/18S ribosomal-based 
+metagenomics or tumor genetic diversity by amplicons.
+
+In this tutorial, we illustrate use of the functions provided in the package
+to explore and manipulate sequence alignments, convert reads to haplotypes and
+frequencies, repair reads, intersect strand haplotypes, and visualize haplotype
+alignments.
+
+# Install package
+
+```{r,message=FALSE}
+library(devtools)
+library(Biostrings)
+library(ape)
+library(ggplot2)
+
+install_git("https://github.com/VHIRHepatiques/QSutils")
+library(QSutils)
+```
+
+# Data
+
+The package contains functions that work on quasispecies data, defined by an 
+alignment of haplotypes and their frequencies. Data are loaded from fasta
+formatted files, where the header of each sequence describes the ID of a
+haplotype and its corresponding frequency in the quasispecies population.
+These two pieces of information are separated by a vertical bar '|'. When
+frequency information is missing, each sequence is considered as a single read.
+
+```{r}
+cat(readLines("../inst/extdata/ToyData_10_50_1000.fna") , sep = "\n")
+```
+
+The `ReadAmplSeqs` function loads the data from the fasta file and returns a 
+list with two elements: the DNAStringSet `hseqs` with haplotype sequences, 
+and the vector of counts, `nr`.
+
+```{r}
+lst <- ReadAmplSeqs("../inst/extdata/ToyData_10_50_1000.fna",type="DNA")
+lst
+```
+
+The `GetQSData` function loads the data from the fasta file, removes haplotypes
+with relative abundances below a given threshold, and sorts the remaining
+haplotypes, first by an increasing number of mutations with respect to the
+dominant haplotype and then by decreasing frequencies within the number of
+mutations.
+
+```{r}
+lstG <- GetQSData("../inst/extdata/ToyData_10_50_1000.fna",min.pct= 2,
+        type="DNA")
+lstG
+```
+
+Note that the haplotype present in an amount below 2% of the total population
+has now been removed.
+
+### Collapsing reads to haplotypes
+
+Although `ReadAmplSeqs` can read fasta files that have no frequency information,
+it is more efficient to use `Biostrings::readDNAStringSet` directly. Then reads
+can be converted to haplotypes and frequencies with the help of function 
+`Collapse`.
+
+```{r}
+reads <- readDNAStringSet("../inst/extdata/Toy.GapsAndNs.fna")
+reads
+```
+
+```{r}
+lstCollapsed <- Collapse(reads)
+str <- DottedAlignment(lstCollapsed$hseqs)
+data.frame(Hpl=str,nr=lstCollapsed$nr)
+```
+
+Aligned raw reads may contain missing information in the form of gaps, noted 
+as ‘-’, or indeterminates, noted as ‘N’. `CorrectGapsAndNs` returns the 
+alignment with these positions corrected based on the reference sequence, in 
+this case the dominant haplotype.
+
+```{r}
+lstCorrected<-CorrectGapsAndNs(lstCollapsed$hseqs[2:length(lstCollapsed$hseqs)],
+                lstCollapsed$hseqs[[1]])
+#Add again the most abundant haplotype.
+lstCorrected<- c(lstCollapsed$hseqs[1],lstCorrected)
+lstCorrected
+```
+
+After these corrections, some sequences may be duplicated, so it is useful 
+to recollapse the alignment to obtain corrected haplotypes with updated
+frequencies.
+
+
+```{r}
+lstRecollapsed<-Recollapse(lstCorrected,lstCollapsed$nr)
+lstRecollapsed
+```
+
+### Forward and reverse strand haplotype intersection
+
+A key step in error correction with amplicon NGS is selecting haplotypes above
+a minimum frequency represented in both strands. In the next example we load 
+forward and reverse haplotypes from two separate fasta files.
+
+```{r}
+lstFW <- ReadAmplSeqs("../inst/extdata/ToyData_FWReads.fna",type="DNA")
+cat("Reads: ",sum(lstFW$nr),", Haplotypes: ",length(lstFW$nr),"\n",sep="")
+```
+
+```{r}
+lstRV <- ReadAmplSeqs("../inst/extdata/ToyData_RVReads.fna",type="DNA")
+cat("Reads: ",sum(lstRV$nr),", Haplotypes: ",length(lstRV$nr),"\n",sep="")
+```
+
+Haplotypes in each strand that do not reach a minimum frequency of 0.1% are 
+then removed, and haplotypes above this frequency and common to both strands
+are then selected and their frequencies updated by the function
+`IntersectStrandHpls`.
+
+```{r,results='hold'}
+lstI <- IntersectStrandHpls(lstFW$nr,lstFW$hseqs,lstRV$nr,lstRV$hseqs)
+
+cat("FW and Rv total reads:",sum(lstFW$nr)+sum(lstRV$nr),"\n")
+cat("FW and Rv reads above thr:",sum(lstI$pFW)+sum(lstI$pRV),"\n")
+cat("FW haplotypes above thr:",sum(lstFW$nr/sum(lstFW$nr)>0.001),"\n")
+cat("RV haplotypes above thr:",sum(lstRV$nr/sum(lstRV$nr)>0.001),"\n")
+cat("\n")
+cat("Reads in FW unique haplotypes:",sum(lstI$pFW[lstI$pRV==0]),"\n")
+cat("Reads in RV unique haplotypes:",sum(lstI$pRV[lstI$pFW==0]),"\n")
+cat("\n")
+cat("Reads in common:",sum(lstI$nr),"\n")
+cat("Haplotypes in common:",length(lstI$nr),"\n")
+```
+
+## Simulate quasispecies data
+
+Several functions in this package enable simulation of quasispecies data. This 
+is useful for various proposes, such as comparing data and testing diversity 
+indices. The vignette 
+[Simulating Quasispecies Composition](QSutils-Simulation.html) 
+provides examples of such data simulation.
+
+# Quasispecies data exploration
+
+Let’s load a toy data on which to exemplify different tasks and functions.
+
+```{r}
+lst <- ReadAmplSeqs("../inst/extdata/ToyData_10_50_1000.fna",type="DNA")
+lst
+```
+
+The `ConsSeq` function returns the consensus sequence resulting from an 
+alignment. This function does not consider IUPAC ambiguity codes, and when 
+there is a tie, the consensus nucleotide is decided randomly.
+
+```{r}
+ConsSeq(lst$hseqs)
+```
+
+To visualize the differences between haplotypes that comprise the quasispecies,
+the `DottedAlignment` function returns a vector of character strings, one for 
+each haplotype, where a dot is shown to represent a conserved site with respect
+to the dominant haplotype.
+
+```{r}
+DottedAlignment(lst$hseqs)
+```
+
+The output of `ReadAmplSeqs` can be sorted by the number of mutations with 
+regard to the most abundant haplotype using the function `SortByMutations`, 
+in which the first haplotype is the most similar one and the last haplotype is
+the one with the largest number of mutations. This function also returns a 
+vector with the number of mutations in each haplotype.
+
+```{r}
+lstSorted<-SortByMutations(lst$hseqs,lst$nr)
+lstSorted
+```
+
+The frequencies of nucleotides or amino acids at each position can be computed 
+with the function `FreqMat`.
+
+```{r}
+FreqMat(lst$hseqs)
+```
+
+To take into account the abundance of each haplotype when computing the
+mutation frequency, the haplotype abundances are passed to the function
+that computes the same matrix, but with the abundances.
+
+```{r}
+FreqMat(lst$hseqs,lst$nr)
+```
+
+We may be interested only in mutated positions, so with `MutsTbl` the matrix 
+obtained reports only the frequency of the mutated nucleotide or amino acid per
+position.
+
+```{r}
+MutsTbl(lst$hseqs)
+```
+
+As can be done with `FreqMat`, with `MutsTbl` the abundances of the haplotypes
+can be passed to the function to obtain a mutation table with abundance
+information.
+
+```{r}
+MutsTbl(lst$hseqs, lst$nr)
+```
+
+When the sequences are particularly large, the function `SummaryMuts` computes
+a table showing the polymorphic positions in the alignment and the frequency 
+of each nucleotide or amino acid observed.
+
+```{r}
+SummaryMuts(lst$hseqs,lst$nr,off=0)
+```
+
+Then, the `PolyDist` function can be used to obtain the fraction of 
+substitutions by polymorphic site in a simpler manner. This function can be 
+used either with or without the vector of abundances.
+
+```{r}
+PolyDist(lst$hseqs,lst$nr)
+PolyDist(lst$hseqs)
+```
+
+To summarize the mutation information and compute the coverage of each 
+mutation, the `ReportVariants` function is used. This function requires a 
+reference sequence, which in some cases could be the dominant haplotype.
+
+```{r}
+ReportVariants(lst$hseqs[2:length(lst$hseqs)],lst$hseqs[[1]],lst$nr)
+```
+
+Another way to explore the positions with mutations is by computing a matrix 
+with the information content (IC) of each position using `GetInfProfile`.
+If the sample is DNA, the maximum IC is 2, whereas when working with amino 
+acids, the maximum is 4.32.
+
+```{r}
+GetInfProfile(lst$hseqs,lst$nr)
+```
+
+And this can be plotted:
+
+```{r,fig.cap="Information content per position in the alignment"}
+dplot <- data.frame(IC=GetInfProfile(lst$hseqs,lst$nr),
+                    pos=1:width(lst$hseqs)[1])
+
+ggplot(dplot, aes(x=pos, y=IC)) + geom_point() +
+scale_x_continuous(minor_breaks = 1:nrow(dplot), breaks = 1:nrow(dplot)) +
+theme(axis.text.x = element_text(angle=45))
+
+```
+
+
+# Quasispecies complexity by biodiversity indices
+
+There is a vignette that deepens with the diversity indices of the 
+quasispecies: 
+[Characterizing viral quasispecies](QSutils-Diversity.html) is also available
+in this package.
+
+
+# Genotyping 
+
+Another interesting procedure is to genotype an unknown sample. To that end, 
+a set of reference sequences is needed for each genotype. A minimum of five 
+well characterized sequences by genotype is suggested. The sets are supposed 
+to be representative of each genotype and will provide an estimate of within 
+genotype variance. Function `DBrule`, used in genotyping, takes into account 
+the distance between the target haplotype and each genotype and the within 
+genotype variability.
+
+The first step is to load the target haplotype to be genotyped with
+`ReadAmplSeqs`, as is shown:
+
+```{r}
+lst2Geno <- ReadAmplSeqs("../inst/extdata/Unknown-Genotype.fna",type="DNA")
+hseq <- lst2Geno$hseq[1]
+hseq
+```
+
+The reference genotype sequences are then loaded using the same procedure.
+
+```{r}
+lstRefs <- ReadAmplSeqs("../inst/extdata/GenotypeStandards_A-H.fas",type="DNA")
+RefSeqs <- lstRefs$hseq
+{ cat("Number of reference sequences by genotype:\n")
+    print(table(substr(names(RefSeqs),1,1)))
+}
+```
+
+Next, the distances between the target haplotype and the reference 
+haplotypes are computed. The matrix of distances between reference haplotypes
+is stored, in the next code sniped, in dgrp, whereas the distances of the 
+target haplotype to the reference sequences are stored in vector d. The
+`DBrule` function computes then the most likely genotype based on both, the 
+distances from the target haplotype to the references, and the distances 
+between references of the same genotype.
+
+```{r}
+dm <- as.matrix(DNA.dist(c(hseq,RefSeqs),model="K80"))
+dgrp <- dm[-1,-1]
+d <- dm[1,-1]
+grp <- factor(substr(rownames(dgrp),1,1))
+hr <- as.integer(grp)
+dsc <- DBrule(dgrp,hr,d,levels(grp))
+print(dsc)
+```
+
+The target sequence has been classified as genotype D, giving the lowest 
+Phi square value.
+
+***
+
+```{r,echo=FALSE}
+sessionInfo()
+```
+
+#References

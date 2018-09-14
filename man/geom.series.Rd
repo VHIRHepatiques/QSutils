@@ -1,10 +1,10 @@
 \name{geom.series}
 \alias{geom.series}
 \title{
-Geometric series.
+Geometric series
 }
 \description{
-Function to simulate haplotype abundances of quasispecies by
+Function to simulate haplotype abundances in the quasispecies by
 geometric series.
 }
 \usage{
@@ -19,16 +19,15 @@ Numeric parameter of the geometric function.
 }
 }
 \details{
-The abundances, as counts, are computed according to the 
-following equation:
+The abundances, as counts, are computed according to the following equation:
 \deqn{p ~(1-p)^{i-1},  ~~ i=1..n}
-The lower \code{r} the faster the decrease in abundances.
+The lower \code{r}, the faster the decrease in abundances.
 }
 \value{
 Numeric vector with \code{n} decreasing counts.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{fn.ab.1}},\code{\link{fn.ab.2}}, \code{\link{fn.ab.3}},

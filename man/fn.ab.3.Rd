@@ -1,11 +1,11 @@
 \name{fn.ab.3}
 \alias{fn.ab.3}
 \title{
-Vector of abundances by increasing root powers.
+Vector of abundances by increasing root powers
 }
 \description{
-Function to simulate haplotype abundances of quasispecies 
-by increasing root powers.
+Function to simulate haplotype abundances in the quasispecies by 
+increasing root powers.
 }
 \usage{
 fn.ab.3(n, h = 10000)
@@ -15,20 +15,20 @@ fn.ab.3(n, h = 10000)
 Number of counts to compute.
 }
     \item{h}{
-Higher value for the counts.
+Highest abundance value.
 }
 }
 \details{
-The abundances, as counts, are computed according to the following 
-equation, taking the integer part:
+The abundances, as counts, are computed according to the following equation, 
+taking the integer part:
 \deqn{ max(h^{(1/i)},1); ~~ i=1..n}
 }
 \value{
-Numeric vector with \code{n} decreasing counts, where 
-the first element equals \code{h}, and no element is lower than 1.
+Numeric vector with \code{n} decreasing counts, where the first element equals 
+\code{h}, and no element is lower than 1.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{fn.ab.1}}, \code{\link{fn.ab.2}}, 

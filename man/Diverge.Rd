@@ -1,12 +1,12 @@
 \name{Diverge}
 \alias{Diverge}
 \title{
-Generate a set of diverging haplotypes. 
+Generate a set of diverging haplotypes
 }
 \description{
-Generates a set of diverging haplotypes from the given DNA sequence.
-The haplotypes produced share a pattern of divergence with increasing 
-number of mutations.
+Generates a set of diverging haplotypes from the given DNA sequence. The 
+haplotypes produced share a pattern of divergence with an increasing number 
+of mutations.
 }
 \usage{
 Diverge(vm, seq)
@@ -20,8 +20,8 @@ Reference sequence from which to generate the variants.
 }
 }
 \details{
-\code{max(vm)} positions in the given sequence are randomly generated. 
-A substitution is also randomly produced for each of these positions.
+\code{max(vm)} Positions in the given sequence are randomly generated.
+A substitution is also randomly produced for each of these positions. 
 A haplotype is generated for each element in \code{vm}, so that it contains
 \code{vm[i]} substitutions of those previously generated.
 }
@@ -29,7 +29,7 @@ A haplotype is generated for each element in \code{vm}, so that it contains
 Character string vector with the segregating haplotypes generated.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{GetRandomSeq}} 

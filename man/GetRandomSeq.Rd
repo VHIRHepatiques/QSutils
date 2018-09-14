@@ -1,7 +1,7 @@
-﻿\name{GetRandomSeq}
+\name{GetRandomSeq}
 \alias{GetRandomSeq}
 \title{
-Generate a random sequence.
+Generate a random sequence
 }
 \description{
 Creates a random DNA sequence of a given length.
@@ -18,7 +18,7 @@ The sequence length.
 A character string representing a DNA sequence.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{GenerateVars}}, \code{\link{Diverge}}

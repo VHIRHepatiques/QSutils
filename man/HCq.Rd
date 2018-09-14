@@ -1,16 +1,16 @@
-﻿\name{HCq}
+\name{HCq}
 \alias{HCq}
 \alias{HCqVar}
 \alias{HCqProfile}
 \title{
-Set of functions to compute Havrda-Charvat estimator.
+Set of functions to compute the Havrda-Charvat estimator
 }
 \description{
-HCq computes the Havrda-Charvat estimator and HCqVar function the 
-Havrda-Charvat asymptotic variance for a given exponent. By using HCqProfile
-a Havrda-Charvat estimator is calculated for a predefined vector of 
-exponents to obtain the full 
-profile in the range 0 to Inf.
+HCq computes the Havrda-Charvat estimator, and HCqVar computes the 
+Havrda-Charvat asymptotic variance for a given exponent. By using HCqProfile, 
+a Havrda-Charvat estimator is calculated for a predefined vector of exponents 
+to obtain the full profile in the range, 0 to Inf.
+
 }
 \usage{
 HCq(w, q)
@@ -22,20 +22,18 @@ HCqProfile(w, q = NULL)
 Vector of observed counts or frequencies.
 }
     \item{q}{
-Exponent. By default a vector of values 1, 2, 3, 4 and Inf.
+Exponent. By default, a vector of values 1, 2, 3, 4 and Inf.
 }
 }
 \details{
-In \code{HCq} just the first element in q is considered. 
-\code{HCqProfile} is vectorized and considers all elemenst in q, in this case 
-when q is NULL a default vector is taken to get the full profile in the range
-0 to Inf.
+In \code{HCq} only  the first element in q is considered. \code{HCqProfile} is 
+vectorized and considers all elements in q. When q is NULL: in this case, a 
+default vector is taken to obtain the full profile in the range 0 to Inf.
 }
 \value{
-A value that corresponds to the Havrda-Charvat estimator, in case of using 
-\code{HCq} or \code{HCqVar}. 
-A data frame with the Havrda-Charvat estimator for each exponent when using 
-\code{HCqProfile}.
+A value that corresponds to the Havrda-Charvat estimator when \code{HCq} or 
+\code{HCqVar} is used. A data frame with the Havrda-Charvat estimator for each 
+exponent when \code{HCqProfile} is used.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -52,7 +50,7 @@ UMR CNRS 5558 Biometrie et Biologie Evolutive.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{Hill}}, \code{\link{Renyi}}
@@ -66,12 +64,11 @@ nr<-c(464, 62, 39, 27, 37, 16, 33, 54, 248, 20)
 HCq(nr,4)
 
 # Havrda-Charvat estimator variance for q=4.
-
 HCqVar(nr,4)
 
 # Prolife of Havrda-Charvat estimator for 0:4 and Inf.
 HCqProfile(nr,c(0:4,Inf))
 
-# Full profile
+# Full profile.
 HCqProfile(nr)
 }

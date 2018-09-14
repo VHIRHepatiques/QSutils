@@ -1,12 +1,12 @@
 \name{CorrectGapsAndNs}
 \alias{CorrectGapsAndNs}
 \title{
-Function to correct an alignment with gaps and Ns.
+Function to correct an alignment with gaps and Ns
 }
 \description{
-Corrects positions in a DNAStringSet or AAStringSet of aligned 
-haplotypes, replacing gaps or Ns with the nucleotide or amino acid
-in the corresponding position in the reference sequence.
+Corrects positions in a DNAStringSet or AAStringSet of aligned haplotypes, 
+replacing gaps and Ns (indeterminates) with the nucleotide or amino acid from 
+the corresponding position in the reference sequence.
 }
 \usage{
 CorrectGapsAndNs(hseqs, ref.seq)
@@ -16,12 +16,12 @@ CorrectGapsAndNs(hseqs, ref.seq)
 DNAStringSet or AAStringSet object with the alignment to correct.
 }
     \item{ref.seq}{
-Character vector with the reference squence of the alignment.
+Character vector with the reference sequence of the alignment.
 }
 }
 \value{
-DNAStringSet or AAStringSet object with the sequences corrected. 
-Duplicated haplotypes may arise as a consequence of this operation.
+DNAStringSet or AAStringSet object with the sequences corrected. Duplicate 
+haplotypes may arise as a consequence of this operation. 
 See \code{\link{Recollapse}}.
 }
 \references{
@@ -41,26 +41,26 @@ PubMed PMID: 23523552.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{Recollapse}}
 }
 \examples{
-# Create a random reference sequence.
+# Create a random reference sequence. 
 ref.seq <-GetRandomSeq(50)
 ref.seq
 
-# Create an aligment with gaps and Ns. 
+# Create an alignment with gaps and Ns. 
 symb <- c(".","-","N")
 nseqs <- 12
 p <- c(0.9,0.06,0.04)
-hseqs <- matrix(sample(symb,50*nseqs,replace=TRUE,prob=p),ncol=50)
+hseqs <- matrix(sample(symb,50*nseqs,replace=TRUE,prob=p),ncol=50) 
 hseqs <- apply(hseqs,1,paste,collapse="")
 hseqs
 hseqs <- DNAStringSet(hseqs)
 
-# Appy the function and visualize the result.
-cseqs <- CorrectGapsAndNs(hseqs,as.character(ref.seq))
+# Apply the function and visualize the result.
+cseqs <- CorrectGapsAndNs(hseqs,as.character(ref.seq)) 
 c(ref.seq,as.character(cseqs))
 }

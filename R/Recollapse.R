@@ -1,5 +1,5 @@
 Recollapse <-
-function(seqs,nr){ 
+function(seqs,nr){
     cls <- class(seqs)
     sqtbl <- sort(tapply(nr,as.character(seqs),sum),decreasing=TRUE)
     seqs <- names(sqtbl)

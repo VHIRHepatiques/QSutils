@@ -1,21 +1,21 @@
 \name{GetQSData}
 \alias{GetQSData}
 \title{
-Read aligned sequences, filters at minimum abundance and sorts the sequences.
+Read the aligned sequences, filter at minimum abundance, and sort the sequences
 }
 \description{
-Read amplicon aligned sequences with abundance data, filter at a minimum 
-given abundance, and sort by mutations and abundance.
+Reads aligned amplicon sequences with abundance data, filters at a given 
+minimum abundance, and sorts by mutations and abundance.
 }
 \usage{
 GetQSData(flnm,min.pct=0.1,type="DNA")
 }
 \arguments{
     \item{flnm}{
-Fasta file with haplotypes sequences and their frequencies. The header of
-eachhaplotype in the fasta file is composed of an ID followed by a vertical
-bar '|' followed by the read counts, and eventually followed by another 
-vertical bar and additional information (i.e. Hpl.2.0001|15874|25.2)
+Fasta file with haplotype sequences and their frequencies. The header of each 
+haplotype in the fasta file is composed of an ID followed by a vertical bar "|"
+followed by the read counts, and eventually followed by another vertical bar 
+and additional information (eg, Hpl.2.0001|15874|25.2).
 }
     \item{min.pct}{
 Minimum abundance, in \%, to filter the reads. Defaults to 0.1\%.
@@ -27,21 +27,20 @@ This must be one of "DNA" or "AA". It is "DNA" by default.
 }
 \details{
 The fasta file is loaded and the haplotype abundances, as counts, are taken 
-from the header of each sequence. Haplotypes with abundances below 
-\code{min.pct} \% are filtered out. 
-The haplotypes are then sorted first by decreasing order of the number of 
-mutations with respect 
-to the dominant haplotype, and second by decreasing order of abundances. As a
-result the haplotypes are renamed according to the pattern 
-\code{Hpl.n.xxxx}, where \code{n} represents the number of mutations, and
-\code{xxxx} the abundance order within mutation number.
+from the header of each sequence. Haplotypes with abundances below
+\code{min.pct} \% are filtered out. The haplotypes are then sorted: first, 
+by decreasing order of the number of mutations with respect to the dominant 
+haplotype, and second, by decreasing order of abundances. The haplotypes are 
+then renamed according to the pattern \code{Hpl.n.xxxx}, where \code{n} 
+represents the number of mutations, and \code{xxxx} the abundance order within 
+the mutation number.
 }
 \value{
 Returns a list with three elements.
 \item{bseqs}{DNAStringSet or AAStringSet with the haplotype sequences.}
 \item{nr}{Vector of haplotype counts.}
-\item{nm}{Vector of number of mutations of each haplotype with respect 
-to the dominant (most frequent) haplotype.}
+\item{nm}{Vector of number of mutations of each haplotype with respect to the 
+dominant (most frequent) haplotype.}
 }
 \references{
 
@@ -60,7 +59,7 @@ PubMed PMID: 23523552.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \seealso{

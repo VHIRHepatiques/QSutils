@@ -1,7 +1,7 @@
 \name{ReportVariants}
 \alias{ReportVariants}
 \title{
-Report variants.
+Report variants
 }
 \description{
 Reports the variants of a DNAStringSet or AAStringSet of haplotypes 
@@ -15,21 +15,20 @@ ReportVariants(hseqs,ref.seq,nr=NULL,start=1)
 DNAStringSet or AAstringSet object of the aligned haplotypes.
 }
     \item{ref.seq}{
-Character vector with the reference squence of the alignment.
+Character vector with the reference sequence of the alignment.
 }
     \item{nr}{
-Numeric vector with the abundandes of each haplotype in hseqs. When 
-\code{nr} is NULL a vector 
-of ones is taken as default. 
+Numeric vector with the abundances of each haplotype in hseqs. When \code{nr}
+is NULL, a vector of ones is taken as default.
 }
     \item{start}{
-Position of the frist nucleotide in the alignment
+Position of the first nucleotide in the alignment
 }
 }
 
 \value{
-A dataframe with 4 columns, the nucleotide in the reference sequence, 
-the position, the variant nucleotide and its abundance.
+A dataframe with 4 columns: the nucleotide in the reference sequence, 
+the position, the variant nucleotide, and its abundance.
 }
 \references{
 
@@ -48,15 +47,15 @@ Mar 20. PubMed PMID: 23523552.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \examples{
 
 # Load objects.
 lst<-ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
 
-# Report the variants in this haplotypes, 
-# takeing as a reference the more abundant haplotype.
+# Report the variants in these haplotypes,
+# taking as a reference the most abundant haplotype.
 ReportVariants(lst$hseqs[-1], ref.seq= as.character(lst$hseqs[1]), 
 lst$nr[-1], start = 1)
 }

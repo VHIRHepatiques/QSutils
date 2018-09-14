@@ -1,14 +1,15 @@
-﻿\name{Hill}
+\name{Hill}
 \alias{Hill}
 \alias{HillProfile}
 \title{
-Hill numbers.
+Hill numbers
 }
 \description{
-Functions to compute Hill numbers.
-\code{Hill} computes the Hill number of a single q value.
-\code{HillProfile} computes the Hill numbers for all elements in vector
-\code{q}.
+
+Functions to compute Hill numbers. \code{Hill} computes the Hill number of a 
+single q value. \code{HillProfile} computes Hill numbers for all elements 
+in vector \code{q}.
+
 }
 \usage{
 Hill(w, q)
@@ -24,14 +25,14 @@ Exponent.
 }
 }
 \details{
-In \code{Hill} just the first element in q is considered. 
-\code{HillProfile} is vectorized and considers all elements in \code{q}, 
-in this case when \code{q} is NULL a default vector is taken to get the full
-profile in the range 0 to Inf.
+In \code{Hill} , only the first element in q is considered. \code{HillProfile} 
+is vectorized and considers all elements in \code{q}.When \code{q} is NULL: 
+in this case, a default vector is taken to obtain the full profile in the range,
+0 to Inf.
 }
 \value{
-A value or vector of values that correspond to the Hill number estimators 
-of passed exponents.
+A value or vector of values corresponding to the Hill number estimators of
+passed exponents.
 }
 \references{
 Gregori J, Perales C, Rodriguez-Frias F, Esteban JI, Quer J, Domingo E. Viral 
@@ -45,7 +46,7 @@ PubMed PMID: 24389655.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{HCq}}, \code{\link{Renyi}}

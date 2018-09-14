@@ -1,11 +1,11 @@
-﻿\name{UniqueMutations}
+\name{UniqueMutations}
 \alias{UniqueMutations}
 \title{
-Number of unique mutations.
+Number of unique mutations
 }
 \description{
-\code{UniqueMutations} computes the number of unique mutations 
-in the alignment.
+\code{UniqueMutations} computes the number of unique mutations in the alignment.
+
 }
 \usage{
 UniqueMutations(hseqs)
@@ -29,7 +29,7 @@ approaches. Bioinformatics. 2014 Apr 15;30(8):1104-1111. Epub 2014 Jan 2.
 PubMed PMID: 24389655.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{TotalMutations}}

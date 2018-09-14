@@ -1,7 +1,7 @@
 \name{DBrule}
 \alias{DBrule}
 \title{
-Genotyping by the DB rule.
+Genotyping by the DB rule
 }
 \description{
 Computes the nearest cluster to a given sequence.
@@ -11,17 +11,17 @@ DBrule(grpDist, hr, oDist, g.names = NULL)
 }
 \arguments{
     \item{grpDist}{
-Distances among reference sequences.
+Distances between reference sequences.
 }
     \item{hr}{
-Factor or a vector of integers that contains the type or subtype for each
+Factor or a vector of integers that contains the type or subtype for each 
 reference sequence.
 }
     \item{oDist}{
 Distance from the sequence to be classified to the reference sequences.
 }
     \item{g.names}{
-Type or subtype names to classify the sequence. 
+Type or subtype names to classify the sequence.
 }
 }
 \value{
@@ -39,32 +39,31 @@ Regions of Hepatitis B Virus. PLoS One. 2015 Dec 29;10(12):e0144816. doi:
 Central PMCID: PMC4695080.
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 
 \examples{
-\dontrun{
 
 # Load haplotype to be genotyped.
-lst <- ReadAmplSeqs("file.fna")
+lst <- ReadAmplSeqs("QSutils/extdata/Unknown-Genotype.fna")
 hseq <- lst$hseq[1]
 
 # Load genotype references.
-RefSeqs <- readDNAStringSet("refernce_genotypes.fas")
+RefSeqs <- readDNAStringSet("QSutils/extdata/GenotypeStandards_A-H.fas")
 
 # Compute pairwise distances.
 dm <- as.matrix(DNA.dist(c(hseq,RefSeqs),model="K80"))
 
-# distances between genotype RefSeqs
+# Distances between genotype RefSeqs
 dgrp <- dm[-1,-1]
 grp <- factor(substr(rownames(dgrp),1,1))
 hr <- as.integer(grp)
 
-# Distance of the query haplotype to the reference sequences.
+# Distance of the query haplotype to the reference sequence.
 d <- dm[1,-1]
 
 # Genotyping by the DB rule.
 dsc <- DBrule(dgrp,hr,d,levels(grp))
 dsc
-}}
+}
 

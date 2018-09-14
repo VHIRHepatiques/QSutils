@@ -1,19 +1,19 @@
 \name{IntersectStrandHpls}
 \alias{IntersectStrandHpls}
 \title{
-Forward and reverse strand haplotypes intersection.
+Forward and reverse strand haplotype intersections
 }
 \description{
-Computes the intersection of forward and reverse strand haplotypes after a 
-previous abundance filter, removing strand haplotypes below a given frequency 
-threshold or unique to a single strand.
+Computes the intersection of forward and reverse strand haplotypes after a
+previous abundance filter that removes strand haplotypes below a given 
+frequency threshold or unique to a single strand.
 }
 \usage{
 IntersectStrandHpls(nrFW, hseqsFW, nrRV, hseqsRV, thr = 0.001)
 }
 \arguments{
     \item{nrFW}{
-Numeric vector with forward strand haplotypes counts.
+Numeric vector with forward strand haplotype counts.
 }
     \item{hseqsFW}{
 DNAStringSet object with the forward strand haplotypes.
@@ -25,16 +25,16 @@ Numeric vector with forward reverse strand haplotypes.
 DNAStringSet object with the reverse strand haplotypes.
 }
     \item{thr}{
-Threshold to filter the minimum abundance of an haplotype.
+Threshold to filter haplotypes at minimum abundance.
 }
 }
 \value{
 List object with this elements:
-    \item{hseqs}{DNAStringSet object with the forward and reverse strand 
+    \item{hseqs}{DNAStringSet object with the forward and reverse strand
     intersected.}
-    \item{nr}{Numeric vector with the abundances of each haplotype.}
-    \item{pFW}{Vector of abundances aligned of forward strand haplotypes. }
-    \item{pRV}{Vector of abundances aligned of reverse strand haplotypes. }
+    \item{nr}{Numeric vector with the abundance of each haplotype.}
+    \item{pFW}{Vector of abundances of aligned forward strand.}
+    \item{pRV}{Vector of abundances of aligned reverse strand.}
 }
 \references{
 
@@ -53,7 +53,7 @@ Mar 20. PubMed PMID: 23523552.
 
 }
 \author{
-Josep Gregori and Mercedes Guerrero
+Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
 \code{\link{ReadAmplSeqs}}

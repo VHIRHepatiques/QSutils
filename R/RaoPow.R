@@ -1,6 +1,7 @@
 RaoPow <-
 function(dst,q,w=NULL){ 
-    if(class(dst)!="dist" & class(dst)!="matrix") 
+    if(class(dst)=="matrix"){ dst<-as.dist(dst)}
+    if(class(dst)!="dist") 
         stop("The input object must be of dist or matrix class  \n")
     D <- as.matrix(dst)
     if (is.null(w)) w<- rep(1,attr(dst,"Size"))
