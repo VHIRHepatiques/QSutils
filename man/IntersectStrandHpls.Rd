@@ -61,8 +61,10 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \examples{
 
 # Load objects.
-FW<- ReadAmplSeqs("QSutils/extdata/ToyData_FWReads.fna",type="DNA")
-RV<- ReadAmplSeqs("QSutils/extdata/ToyData_RVReads.fna",type="DNA")
+filepath_FW<-system.file("extdata","ToyData_FWReads.fna", package="QSutils")
+FW<- ReadAmplSeqs(filepath_FW,type="DNA")
+filepath_RV<-system.file("extdata","ToyData_RVReads.fna", package="QSutils")
+RV<- ReadAmplSeqs(filepath_RV,type="DNA")
 
 # Intersect the two objects, with a default threshold.
 IntersectStrandHpls(FW$nr,FW$hseqs,RV$nr,RV$hseqs)

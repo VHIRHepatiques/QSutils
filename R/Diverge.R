@@ -1,10 +1,10 @@
 Diverge <-
 function(vm,seq){ 
-    if(class(seq)!="character")
+    if(!is(seq,"character"))
         seq <- as.character(seq)
     if( !all(strsplit(seq,"")[[1]] %in% DNA_BASES)) 
         stop("The seq argument must be a DNA sequence")
-    if(class(vm)!="numeric" & class(vm)!="integer") 
+    if(!is(vm,"numeric") & !is(vm,"integer") )
         stop("The vm argument must be numeric")
     mutate <- function(nt){ 
         nt.nms <- DNA_BASES

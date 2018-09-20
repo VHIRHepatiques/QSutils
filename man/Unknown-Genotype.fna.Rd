@@ -20,7 +20,8 @@ peptide sequences.
 \code{\link{DBrule}}
 }
 \examples{
-lst2Geno <- ReadAmplSeqs("QSutils/extdata/Unknown-Genotype.fna",type="DNA")
+filepath<-system.file("extdata","Unknown-Genotype.fna", package="QSutils")
+lst2Geno <- ReadAmplSeqs(filepath,type="DNA")
 hseq <- lst2Geno$hseq[1]
 hseq
 }

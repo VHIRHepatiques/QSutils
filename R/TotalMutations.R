@@ -1,6 +1,6 @@
 TotalMutations <-
 function(hseqs,w=NULL){ 
-    if(class(hseqs)!="DNAStringSet" & class(hseqs)!="AAStringSet") 
+    if(!is(hseqs,"DNAStringSet") & !is(hseqs,"AAStringSet"))
         stop("The input object must be DNAStringSet or AAStringSet \n")
     if(is.null(w)) 
         w <- rep(1,length(hseqs))

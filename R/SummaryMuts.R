@@ -1,6 +1,6 @@
 SummaryMuts <-
 function(seqs,w=NULL,off=0){ 
-    if(class(seqs)!="DNAStringSet" & class(seqs)!="AAStringSet") 
+    if(!is(seqs,"DNAStringSet") & !is(seqs,"AAStringSet"))
         stop("The input object must be DNAStringSet or AAStringSet\n")
     if(length(seqs)<2){
         warning("More than 1 sequence is needed")

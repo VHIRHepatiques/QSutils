@@ -56,7 +56,8 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \examples{
 
 # Load alignment with abundances.
-lst <- GetQSData("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- GetQSData(filepath,type="DNA")
 
 # Mutation frequency. 
 dst <- DNA.dist(lst$seqs,model="raw")

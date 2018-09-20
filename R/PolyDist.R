@@ -1,6 +1,6 @@
 PolyDist <-
 function(seqs,w=NULL){ 
-    if(class(seqs)!="DNAStringSet" & class(seqs)!="AAStringSet") 
+    if(!is(seqs,"DNAStringSet") & !is(seqs,"AAStringSet"))
         stop("The input object must be DNAStringSet or AAStringSet \n")
     if(is.null(w)) w <- rep(1,length(seqs))
     if(length(seqs)!=length(w)) 

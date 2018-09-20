@@ -4,13 +4,13 @@ IntersectStrandHpls <-
             stop("The length of the sequences and the counts must be equal \n")
         if(length(nrRV)!= length(hseqsRV)) 
             stop("The length of the sequences and the counts must be equal \n")
-        if(class(hseqsFW)!= "character" & class(hseqsRV)!= "character" & 
-            class(hseqsFW)!= "DNAStringSet" & class(hseqsRV)!= "DNAStringSet" &
-            class(hseqsFW)!= "AAStringSet" & class(hseqsRV)!= "AAStringSet") 
+        if(!is(hseqsFW,"character") & !is(hseqsRV,"character") & 
+            !is(hseqsFW,"DNAStringSet") & !is(hseqsRV,"DNAStringSet") &
+            !is(hseqsFW,"AAStringSet") & !is(hseqsRV,"AAStringSet")) 
         {stop("The sequences must be character vector or DNAStringSet or 
             AAStringSet\n")}
-        if(class(nrFW)!="numeric" & class(nrRV)!="numeric" &
-            class(thr)!="numeric") 
+        if(!is(nrFW,"numeric") & !is(nrRV,"numeric") &
+            !is(thr,"numeric"))
         {stop("The sequences must be numeric vector \n")}
         AlgnStrandHpls <-
             function (nrFW , hseqsFW ,nrRV , hseqsRV ){ 

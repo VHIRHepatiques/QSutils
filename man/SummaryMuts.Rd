@@ -52,7 +52,8 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \examples{
 
 # Load haplotype alignment with abundances.
-lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 
 # Distribution of nucleotides at polymorphic sites.
 SummaryMuts(lst$hseqs,lst$nr,off=0)

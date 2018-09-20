@@ -1,6 +1,6 @@
 SortByMutations <-
 function(bseqs,nr){ 
-    if(class(bseqs)!="DNAStringSet" & class(bseqs)!="AAStringSet") 
+    if(!is(bseqs,"DNAStringSet") & !is(bseqs,"AAStringSet"))
         stop("The input object must be DNAStringSet or AAStringSet\n")
     if(length(bseqs)!=length(nr)) 
         stop("The input objects must have the same length \n")

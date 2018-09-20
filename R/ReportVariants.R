@@ -1,11 +1,11 @@
 ReportVariants <-
 function(hseqs,ref.seq,nr=NULL,start=1){ 
-    if(class(hseqs)!="DNAStringSet" & class(hseqs)!="AAStringSet") 
+    if(!is(hseqs,"DNAStringSet") & !is(hseqs,"AAStringSet"))
         stop("The input object hseqs must be DNAStringSet  or AAString\n")
     if(is.null(nr)) nr<- rep(1,length(hseqs))
-    if(class(nr)!= "numeric") stop("The imput object nr must be numeric \n")
-    if(class(ref.seq)!="character" & class(ref.seq)!="DNAString" 
-    & class(ref.seq)!="AAString") 
+    if(!is(nr,"numeric")) stop("The imput object nr must be numeric \n")
+    if(!is(ref.seq,"character") & !is(ref.seq,"DNAString")
+    & !is(ref.seq,"AAString"))
         {stop("The input object ref.seq must be character \n")}
     rnt <- strsplit(as.character(ref.seq),split="")[[1]]
     mnt <- as.matrix(hseqs)

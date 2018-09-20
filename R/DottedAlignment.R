@@ -1,8 +1,8 @@
 DottedAlignment <-
 function(hseqs){ 
-    if(class(hseqs)=="character")
+    if(is(hseqs,"character"))
         hseqs <- DNAStringSet(hseqs)
-    if(class(hseqs)!="DNAStringSet" & class(hseqs)!="AAStringSet") 
+    if(!is(hseqs,"DNAStringSet") & !is(hseqs,"AAStringSet")) 
         stop("The input object must be DNAStringSet or AAStringSet \n")
     bpm <- as.matrix(hseqs)  
     master <- bpm[1,]

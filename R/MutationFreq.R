@@ -1,7 +1,7 @@
 MutationFreq <-
 function(dst=NULL,nm=NULL,nr=NULL,len=1){ 
     if(!is.null(dst)){
-        if(class(dst)!="dist" & class(dst)!="matrix") 
+        if(!is(dst,"dist") & !is(dst,"matrix")) 
             stop("The input object must be dist or matrix class \n")
         nru <- rep(1,nrow(as.matrix(dst)))
         mf <- sum(as.matrix(dst)[1,]*nru)/sum(nru)

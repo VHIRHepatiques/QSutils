@@ -1,6 +1,6 @@
 RaoVar <-
 function(dst,w=NULL){ 
-    if(class(dst)!="dist") stop("The input object must be dist class  \n")
+    if(!is(dst,"dist")) stop("The input object must be dist class  \n")
     if (is.null(w)) w<- rep(1,ncol(dst))
     if(nrow(as.matrix(dst))!=length(w)) 
         stop ("w and dst must have the same length")

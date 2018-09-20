@@ -19,8 +19,11 @@ peptide sequences.
 \code{\link{ToyData_RVReads.fna}}, \code{\link{IntersectStrandHpls}}
 }
 \examples{
-lstFW <- ReadAmplSeqs("QSutils/extdata/ToyData_FWReads.fna",type="DNA")
-lstRV <- ReadAmplSeqs("QSutils/extdata/ToyData_RVReads.fna",type="DNA")
+filepath_FW<-system.file("extdata","ToyData_FWReads.fna", package="QSutils")
+lstFW <- ReadAmplSeqs(filepath_FW,type="DNA")
+filepath_RV<-system.file("extdata","ToyData_RVReads.fna", package="QSutils")
+lstRV <- ReadAmplSeqs(filepath_RV,type="DNA")
+
 lstI <- IntersectStrandHpls(lstFW$nr,lstFW$hseqs,lstRV$nr,lstRV$hseqs)
 lstI
 }

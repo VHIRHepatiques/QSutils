@@ -27,8 +27,8 @@ A (4 x n) or (20 x n) matrix, where n is the alignment length.
 Mercedes Guerrero-Murillo and Josep Gregori
 }
 \examples{
-
-lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 
 # Frequencies only in the alignment.
 FreqMat(lst$hseqs)

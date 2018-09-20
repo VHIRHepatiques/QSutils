@@ -1,9 +1,9 @@
 FreqMat <-
 function(seqs,nr=NULL){ 
-    if(class(seqs)!="DNAStringSet" & class(seqs)!="AAStringSet") 
+    if(!is(seqs,"DNAStringSet") & !is(seqs,"AAStringSet"))
         stop("The input object must be a DNAStringSet or AAStringSet \n")
     nt.nms <- DNA_BASES
-    if (class(seqs)=="AAStringSet") nt.nms <- AA_STANDARD
+    if (is(seqs,"AAStringSet")) nt.nms <- AA_STANDARD
     if (is.null(nr)) nr <- rep(1,length(seqs))
     if(length(seqs)!=length(nr)) 
         stop("The input objects must have the same length \n")

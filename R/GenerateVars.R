@@ -1,10 +1,10 @@
 GenerateVars <-
 function(seq,nhpl,max.muts,p.muts){ 
-    if(class(seq)!="character")
+    if(!is(seq,"character"))
     seq <- as.character(seq)
     if( !all(strsplit(seq,"")[[1]] %in% DNA_BASES)) 
         stop("The seq argument must be a DNA sequence")
-    if(class(nhpl)!="numeric") 
+    if(!is(nhpl,"numeric")) 
         stop("The nhpl argument must be numeric")
     if(length(p.muts)!=max.muts) 
         stop("The p.muts argument must have the same length as max.muts")

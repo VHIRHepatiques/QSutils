@@ -50,7 +50,9 @@ Mercedes Guerrero-Murillo and Josep Gregori
 }
 \examples{
 # Load raw reads.
-reads <- readDNAStringSet("QSutils/extdata/Toy.GapsAndNs.fna")
+filepath<-system.file("extdata","Toy.GapsAndNs.fna", package="QSutils")
+reads <- readDNAStringSet(filepath)
+
 # Collapse this reads into haplotypes
 lstCollapsed <- Collapse(reads)
 lstCorrected<-CorrectGapsAndNs(lstCollapsed$hseqs[2:length(lstCollapsed$hseqs)],

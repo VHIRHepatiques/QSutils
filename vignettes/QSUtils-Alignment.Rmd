@@ -8,7 +8,7 @@ output:
         number_sections: yes
         toc_float: true
 vignette: >
-    %\VignetteIndexEntry{Vignette Title}
+    %\VignetteIndexEntry{QSUtils-Alignment}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
 ---
@@ -68,7 +68,8 @@ These two pieces of information are separated by a vertical bar '|'. When
 frequency information is missing, each sequence is considered as a single read.
 
 ```{r}
-cat(readLines("../inst/extdata/ToyData_10_50_1000.fna") , sep = "\n")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+cat(readLines(filepath) , sep = "\n")
 ```
 
 The `ReadAmplSeqs` function loads the data from the fasta file and returns a 
@@ -76,7 +77,8 @@ list with two elements: the DNAStringSet `hseqs` with haplotype sequences,
 and the vector of counts, `nr`.
 
 ```{r}
-lst <- ReadAmplSeqs("../inst/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 lst
 ```
 
@@ -87,8 +89,8 @@ dominant haplotype and then by decreasing frequencies within the number of
 mutations.
 
 ```{r}
-lstG <- GetQSData("../inst/extdata/ToyData_10_50_1000.fna",min.pct= 2,
-        type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lstG <- GetQSData(filepath,min.pct= 2,type="DNA")
 lstG
 ```
 
@@ -103,7 +105,8 @@ can be converted to haplotypes and frequencies with the help of function
 `Collapse`.
 
 ```{r}
-reads <- readDNAStringSet("../inst/extdata/Toy.GapsAndNs.fna")
+filepath<-system.file("extdata","Toy.GapsAndNs.fna", package="QSutils")
+reads <- readDNAStringSet(filepath)
 reads
 ```
 
@@ -143,12 +146,14 @@ a minimum frequency represented in both strands. In the next example we load
 forward and reverse haplotypes from two separate fasta files.
 
 ```{r}
-lstFW <- ReadAmplSeqs("../inst/extdata/ToyData_FWReads.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_FWReads.fna", package="QSutils")
+lstFW <- ReadAmplSeqs(filepath,type="DNA")
 cat("Reads: ",sum(lstFW$nr),", Haplotypes: ",length(lstFW$nr),"\n",sep="")
 ```
 
 ```{r}
-lstRV <- ReadAmplSeqs("../inst/extdata/ToyData_RVReads.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_RVReads.fna", package="QSutils")
+lstRV <- ReadAmplSeqs(filepath,type="DNA")
 cat("Reads: ",sum(lstRV$nr),", Haplotypes: ",length(lstRV$nr),"\n",sep="")
 ```
 
@@ -185,7 +190,8 @@ provides examples of such data simulation.
 Let’s load a toy data on which to exemplify different tasks and functions.
 
 ```{r}
-lst <- ReadAmplSeqs("../inst/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 lst
 ```
 
@@ -317,7 +323,8 @@ The first step is to load the target haplotype to be genotyped with
 `ReadAmplSeqs`, as is shown:
 
 ```{r}
-lst2Geno <- ReadAmplSeqs("../inst/extdata/Unknown-Genotype.fna",type="DNA")
+filepath<-system.file("extdata","Unknown-Genotype.fna", package="QSutils")
+lst2Geno <- ReadAmplSeqs(filepath,type="DNA")
 hseq <- lst2Geno$hseq[1]
 hseq
 ```
@@ -325,7 +332,8 @@ hseq
 The reference genotype sequences are then loaded using the same procedure.
 
 ```{r}
-lstRefs <- ReadAmplSeqs("../inst/extdata/GenotypeStandards_A-H.fas",type="DNA")
+filepath<-system.file("extdata","GenotypeStandards_A-H.fas", package="QSutils")
+lstRefs <- ReadAmplSeqs(filepath,type="DNA")
 RefSeqs <- lstRefs$hseq
 { cat("Number of reference sequences by genotype:\n")
     print(table(substr(names(RefSeqs),1,1)))

@@ -45,11 +45,13 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \examples{
 
 # Load haplotype to be genotyped.
-lst <- ReadAmplSeqs("QSutils/extdata/Unknown-Genotype.fna")
+filepath<-system.file("extdata","Unknown-Genotype.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 hseq <- lst$hseq[1]
 
 # Load genotype references.
-RefSeqs <- readDNAStringSet("QSutils/extdata/GenotypeStandards_A-H.fas")
+filepath_geno<-system.file("extdata","GenotypeStandards_A-H.fas", package="QSutils")
+RefSeqs <- readDNAStringSet(filepath_geno)
 
 # Compute pairwise distances.
 dm <- as.matrix(DNA.dist(c(hseq,RefSeqs),model="K80"))

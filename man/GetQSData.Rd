@@ -66,6 +66,7 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
-lst<-GetQSData("QSutils/extdata/ToyData_10_50_1000.fna",min.pct=0.1,type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst<-GetQSData(filepath,min.pct=0.1,type="DNA")
 lst
 }

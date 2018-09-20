@@ -18,7 +18,9 @@ peptide sequences.
 \code{\link{Recollapse}}
 }
 \examples{
-reads <- readDNAStringSet("QSutils/extdata/Toy.GapsAndNs.fna")
+filepath<-system.file("extdata","Toy.GapsAndNs.fna", package="QSutils")
+reads <- readDNAStringSet(filepath)
+
 lstCollapsed <- Collapse(reads)
 DottedAlignment(lstCollapsed$hseqs)
 lstCorrected<-CorrectGapsAndNs(lstCollapsed$hseqs[2:length(lstCollapsed$hseqs)],

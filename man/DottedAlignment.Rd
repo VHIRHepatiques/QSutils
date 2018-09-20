@@ -28,7 +28,8 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \code{\link{ReadAmplSeqs}}
 }
 \examples{
-lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 strs <- DottedAlignment(lst$hseqs)
 
 # Create a data frame to visualize the result.

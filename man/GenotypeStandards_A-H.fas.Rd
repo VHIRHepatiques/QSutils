@@ -18,6 +18,8 @@ peptide sequences.
 \code{\link{DBrule}}
 }
 \examples{
-lstRefs <-  ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","GenotypeStandards_A-H.fas", package="QSutils")
+lstRefs <- ReadAmplSeqs(filepath,type="DNA")
+
 RefSeqs <- lstRefs$hseq
 }

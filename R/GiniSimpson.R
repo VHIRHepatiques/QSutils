@@ -1,6 +1,6 @@
 GiniSimpson <-
 function(w){ 
-    if(class(w)!="numeric" & length(w)<=0) 
+    if(!is(w,"numeric") & length(w)<=0) 
         stop("The input object must be a numeric vector \n")
     n <- sum(w)
     if(n<2) return(NULL)

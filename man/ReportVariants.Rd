@@ -52,7 +52,8 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \examples{
 
 # Load objects.
-lst<-ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 
 # Report the variants in these haplotypes,
 # taking as a reference the most abundant haplotype.

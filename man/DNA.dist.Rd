@@ -55,7 +55,8 @@ Mercedes Guerrero-Murillo and Josep Gregori
 \code{\link[ape]{dist.dna}}
 }
 \examples{
-lst <- ReadAmplSeqs("QSutils/extdata/ToyData_10_50_1000.fna",type="DNA")
+filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
+lst <- ReadAmplSeqs(filepath,type="DNA")
 
 dst <- DNA.dist(lst$hseqs,model="N")
 dst
