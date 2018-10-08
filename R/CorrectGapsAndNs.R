@@ -13,7 +13,7 @@ function(hseqs,ref.seq){
     rf <- strsplit(as.character(ref.seq),split ="" )[[1]]
     ntm <- as.matrix(hseqs)
     ntm <- vapply(seq_len(length(rf)), function (j) CorrPos(ntm[,j],rf[j]),
-                  character(nrow(ntm)))
+                character(nrow(ntm)))
     if(is(hseqs,"DNAStringSet")) 
         correctseq <- Biostrings::DNAStringSet(apply(ntm,1,paste,collapse=""))
     if(is(hseqs,"AAStringSet"))
