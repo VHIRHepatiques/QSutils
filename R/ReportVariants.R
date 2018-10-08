@@ -9,14 +9,15 @@ function(hseqs,ref.seq,nr=NULL,start=1){
         {stop("The input object ref.seq must be character \n")}
     rnt <- strsplit(as.character(ref.seq),split="")[[1]]
     mnt <- as.matrix(hseqs)
-    jdx <- which(sapply(1:ncol(mnt),function (j) sum(mnt[,j]!=rnt[j])>0))
+    jdx <- which(vapply(seq_len(ncol(mnt)),function (j) sum(mnt[,j]!=rnt[j])>0,
+                        logical(1L)))
     k <- 0
     vars <- data.frame(WT=character(),Pos=numeric(),Var=character(),
     Cov=numeric(),stringsAsFactors=FALSE)
     for(j in jdx){ 
         idx <- which(mnt[,j]!=rnt[j])
         vnr <- tapply(nr[idx],mnt[idx,j],sum)
-        for (i in 1: length(vnr)){ 
+        for (i in seq_len(length(vnr))){ 
             k <- k+1
             vars[k,"WT"]  <- rnt[j]
             vars[k,"Pos"] <- j+start-1

@@ -8,6 +8,6 @@ function(dst,w=NULL,q=NULL){
     if(is.null(q))
         q <- seq(0,2,0.1)
     m <- length(q)
-    dv <- sapply(1:m,function(i) RaoPow(dst,q[i],w))
+    dv <- vapply(seq_len(m),function(i) RaoPow(dst,q[i],w),numeric(1))
     return(data.frame(q=q,qQ=dv))
 }

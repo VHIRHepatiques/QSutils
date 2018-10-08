@@ -20,9 +20,9 @@ function(seq,nhpl,max.muts,p.muts){
     n.muts <- sample(max.muts,size=nhpl,prob=p.muts,replace=TRUE)
     len <-  length(ntv)
     vseqs <- character(nhpl)
-    for(i in 1:nhpl){ 
+    for(i in seq_len(nhpl)){ 
         ipos <- sample(len,n.muts[i],replace=FALSE)  
-        nt.var <- sapply(ntv[ipos],mutate)
+        nt.var <- vapply(ntv[ipos],mutate,character(1))
         mseq <- ntv
         mseq[ipos] <- nt.var
         vseqs[i] <- paste(mseq,collapse="")

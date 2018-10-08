@@ -10,10 +10,10 @@ function(grpDist,hr,oDist,g.names=NULL){
     g <- max(as.integer(hr))
     grpDist <- as.matrix(grpDist)
     PHI2 <- vector(mode="numeric",length=g)
-    names(PHI2) <- paste("Phi2",1:g,sep=".")
+    names(PHI2) <- paste("Phi2",seq_len(g),sep=".")
     if(!is.null(g.names))
     names(PHI2) <- paste("Phi2",g.names,sep=".")
-    for(i in 1:g){ 
+    for(i in seq_len(g)){ 
         D <- grpDist[hr==i,hr==i,drop=FALSE]
         V <- geovar(D)
         PHI2[i] <- phi(oDist[hr==i])-V

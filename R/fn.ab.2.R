@@ -2,7 +2,7 @@ fn.ab.2 <-
 function(n,h=10000,r=3){ 
     if(!is(n,"numeric") & !is(h,"numeric") & !is(r,"numeric")){
         stop("All arguments must be numeric")} 
-    a <- floor(h*1/(1:n)^r)
+    a <- floor(h*1/(seq_len(n))^r)
     a[a<1] <- 1
     return(a)
 }

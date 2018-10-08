@@ -10,7 +10,7 @@ function(seqs,nr=NULL){
     strm <- as.matrix(seqs)
     res <-  apply(strm,2,function(x) 
         tapply(nr,factor(x,levels=nt.nms),sum))
-    colnames(res) <- 1:ncol(res)
+    colnames(res) <- seq_len(ncol(res))
     res[is.na(res)] <- 0
     return(res)
 }

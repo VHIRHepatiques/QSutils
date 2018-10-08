@@ -50,7 +50,8 @@ lst <- ReadAmplSeqs(filepath,type="DNA")
 hseq <- lst$hseq[1]
 
 # Load genotype references.
-filepath_geno<-system.file("extdata","GenotypeStandards_A-H.fas", package="QSutils")
+filepath_geno<-system.file("extdata","GenotypeStandards_A-H.fas", 
+package="QSutils")
 RefSeqs <- readDNAStringSet(filepath_geno)
 
 # Compute pairwise distances.

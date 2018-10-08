@@ -12,7 +12,7 @@ function(bseqs,nr){
     bseqs <- bseqs[o]
     nr <- nr[o]
     nm <- nm[o]
-    isq <- unlist(sapply(1:length(tnm),function(i) 1:tnm[i]))
+    isq <- unlist(sapply(seq_len(length(tnm)),function(i) seq_len(tnm[i])))
     for(i in as.integer(names(tnm))){ 
         idx <- which(nm==i)
         o <- order(nr[idx],decreasing=TRUE)

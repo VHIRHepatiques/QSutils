@@ -17,11 +17,11 @@ function(vm,seq){
     len <- length(ntv)
     nm <- length(vm)
     ipos <- sample(len,size=max(vm),replace=FALSE)
-    nt.var <- sapply(ntv[ipos],mutate)
+    nt.var <- vapply(ntv[ipos],mutate,character(1))
     dseq <- character(nm)
-    for(i in 1:nm){ 
+    for(i in seq_len(nm)){ 
         mseq <- ntv
-        mseq[ipos[1:vm[i]]] <- nt.var[1:vm[i]]
+        mseq[ipos[seq_len(vm[i])]] <- nt.var[seq_len(vm[i])]
         dseq[i] <- paste(mseq,collapse="")
     }
     return(dseq)
