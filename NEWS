@@ -1,4 +1,4 @@
-CHANGES IN VERSION 0.99.4,5 and 6
+CHANGES IN VERSION 0.99.4,5, and 7
 ==========================
 
 	Internal changes:
@@ -13,7 +13,7 @@ CHANGES IN VERSION 0.99.3
 	-----------------
 	  - QSutils review correction:
 	  		· Vignette: add chunk names
-			· R Change class() -> is()
+			· R Change class -> is()
 			· R hide helper functions
 			· R join more than one function in one file
 			· R vectorize some apply
@@ -36,6 +36,6 @@ CHANGES IN VERSION 0.99.1
 	  - Correction of WARNINGS and ERRORS
 	    with Biocheck:
 		  · Collapse() example ERROR.
-		  · Change class()== -> is() or !is()
+		  · Change class == -> is() or !is()
 		  · Update R version dependency from 3.4.0 to 3.5.
 		  · Correct -> 'VignetteIndexEntry{VignetteTitle}' in QSUtils-Alignment.Rmd
