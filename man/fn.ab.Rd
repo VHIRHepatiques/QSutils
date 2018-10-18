@@ -8,8 +8,6 @@ Function to simulate haplotype abundances in the quasispecies.
 }
 \usage{
 fn.ab(n, h = 10000, r = 0.5,fn="pf")
-fn.ab(n, h = 10000, r = 3,fn="pcf")
-fn.ab(n, h = 10000, fn="dfp")
 }
 \arguments{
     \item{n}{
