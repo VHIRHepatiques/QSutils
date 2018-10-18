@@ -7,7 +7,7 @@ Vector of abundances with different methods
 Function to simulate haplotype abundances in the quasispecies.
 }
 \usage{
-fn.ab(n, h = 10000, r = 0.5,fn="pf")
+fn.ab(n, h = 10000, r = 0.5,fn="pcf")
 }
 \arguments{
     \item{n}{
