@@ -5,7 +5,7 @@ function(n,h=10000,r=0.5,fn="pcf"){
         ##  h: Highest abundance value 
         ##  r: A number to modify the abundance
         ## fn: Function to compute the abundances
-    if(fn!="pcf" & fn!= "pf" & fn!="dpf"){
+    if(fn!="pf" & fn!= "pcf" & fn!="dfp"){
         stop("Check the fn argument options \n")}
     if(!is(n,"numeric") & !is(h,"numeric") & !is(r,"numeric")){
         stop("All arguments must be numeric \n")}
