@@ -3,7 +3,7 @@ function(n,h=10000,r=0.5,fn="pcf"){
     ## Function to simulate haplotype abundances
         ##  n: Number of counts to compute
         ##  h: Highest abundance value 
-        ##  r: A number to modify the abundance
+        ##  r: A number to compute the abundance
         ## fn: Function to compute the abundances
     if(fn!="pf" & fn!= "pcf" & fn!="dfp"){
         stop("Check the fn argument options \n")}

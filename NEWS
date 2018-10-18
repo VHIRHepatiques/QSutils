@@ -3,6 +3,14 @@ CHANGES IN VERSION 0.99.3
 
 	Internal changes:
 	-----------------
+		- QSutils review correction:
+			· fn.ab function correction
+
+CHANGES IN VERSION 0.99.3
+==========================
+
+	Internal changes:
+	-----------------
 	  - QSutils review correction:
 	  		· Vignette: add chunk names
 			· R Change class() -> is()
