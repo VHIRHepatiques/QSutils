@@ -30,7 +30,6 @@ Numeric vector with \code{n} decreasing counts.
 Mercedes Guerrero-Murillo and Josep Gregori
 }
 \seealso{
-\code{\link{fn.ab.1}},\code{\link{fn.ab.2}}, \code{\link{fn.ab.3}},
 \code{\link{GetRandomSeq}}, \code{\link{GenerateVars}}, 
 \code{\link{Diverge}}
 }

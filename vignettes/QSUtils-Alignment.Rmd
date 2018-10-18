@@ -48,13 +48,12 @@ alignments.
 
 # Install package
 
-```{r,message=FALSE}
-library(devtools)
+```{r installation,message=FALSE}
 library(Biostrings)
 library(ape)
 library(ggplot2)
 
-install_git("https://github.com/VHIRHepatiques/QSutils")
+BiocManager::install("QSutils")
 library(QSutils)
 ```
 
@@ -67,7 +66,7 @@ haplotype and its corresponding frequency in the quasispecies population.
 These two pieces of information are separated by a vertical bar '|'. When
 frequency information is missing, each sequence is considered as a single read.
 
-```{r}
+```{r exdata}
 filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
 cat(readLines(filepath) , sep = "\n")
 ```
@@ -76,7 +75,7 @@ The `ReadAmplSeqs` function loads the data from the fasta file and returns a
 list with two elements: the DNAStringSet `hseqs` with haplotype sequences, 
 and the vector of counts, `nr`.
 
-```{r}
+```{r readampl}
 filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
 lst <- ReadAmplSeqs(filepath,type="DNA")
 lst
@@ -88,7 +87,7 @@ haplotypes, first by an increasing number of mutations with respect to the
 dominant haplotype and then by decreasing frequencies within the number of
 mutations.
 
-```{r}
+```{r getqsdata}
 filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
 lstG <- GetQSData(filepath,min.pct= 2,type="DNA")
 lstG
@@ -104,13 +103,13 @@ it is more efficient to use `Biostrings::readDNAStringSet` directly. Then reads
 can be converted to haplotypes and frequencies with the help of function 
 `Collapse`.
 
-```{r}
+```{r exgaps-na}
 filepath<-system.file("extdata","Toy.GapsAndNs.fna", package="QSutils")
 reads <- readDNAStringSet(filepath)
 reads
 ```
 
-```{r}
+```{r collapse}
 lstCollapsed <- Collapse(reads)
 str <- DottedAlignment(lstCollapsed$hseqs)
 data.frame(Hpl=str,nr=lstCollapsed$nr)
@@ -121,7 +120,7 @@ as ‘-’, or indeterminates, noted as ‘N’. `CorrectGapsAndNs` returns the
 alignment with these positions corrected based on the reference sequence, in 
 this case the dominant haplotype.
 
-```{r}
+```{r correctgaps-na}
 lstCorrected<-CorrectGapsAndNs(lstCollapsed$hseqs[2:length(lstCollapsed$hseqs)],
                 lstCollapsed$hseqs[[1]])
 #Add again the most abundant haplotype.
@@ -134,7 +133,7 @@ to recollapse the alignment to obtain corrected haplotypes with updated
 frequencies.
 
 
-```{r}
+```{r recollapse}
 lstRecollapsed<-Recollapse(lstCorrected,lstCollapsed$nr)
 lstRecollapsed
 ```
@@ -145,13 +144,13 @@ A key step in error correction with amplicon NGS is selecting haplotypes above
 a minimum frequency represented in both strands. In the next example we load 
 forward and reverse haplotypes from two separate fasta files.
 
-```{r}
+```{r forward}
 filepath<-system.file("extdata","ToyData_FWReads.fna", package="QSutils")
 lstFW <- ReadAmplSeqs(filepath,type="DNA")
 cat("Reads: ",sum(lstFW$nr),", Haplotypes: ",length(lstFW$nr),"\n",sep="")
 ```
 
-```{r}
+```{r reverse}
 filepath<-system.file("extdata","ToyData_RVReads.fna", package="QSutils")
 lstRV <- ReadAmplSeqs(filepath,type="DNA")
 cat("Reads: ",sum(lstRV$nr),", Haplotypes: ",length(lstRV$nr),"\n",sep="")
@@ -162,7 +161,7 @@ then removed, and haplotypes above this frequency and common to both strands
 are then selected and their frequencies updated by the function
 `IntersectStrandHpls`.
 
-```{r,results='hold'}
+```{r intersect ,results='hold'}
 lstI <- IntersectStrandHpls(lstFW$nr,lstFW$hseqs,lstRV$nr,lstRV$hseqs)
 
 cat("FW and Rv total reads:",sum(lstFW$nr)+sum(lstRV$nr),"\n")
@@ -189,7 +188,7 @@ provides examples of such data simulation.
 
 Let’s load a toy data on which to exemplify different tasks and functions.
 
-```{r}
+```{r loadexample}
 filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
 lst <- ReadAmplSeqs(filepath,type="DNA")
 lst
@@ -199,7 +198,7 @@ The `ConsSeq` function returns the consensus sequence resulting from an
 alignment. This function does not consider IUPAC ambiguity codes, and when 
 there is a tie, the consensus nucleotide is decided randomly.
 
-```{r}
+```{r consensus}
 ConsSeq(lst$hseqs)
 ```
 
@@ -208,7 +207,7 @@ the `DottedAlignment` function returns a vector of character strings, one for
 each haplotype, where a dot is shown to represent a conserved site with respect
 to the dominant haplotype.
 
-```{r}
+```{r dotted}
 DottedAlignment(lst$hseqs)
 ```
 
@@ -218,7 +217,7 @@ in which the first haplotype is the most similar one and the last haplotype is
 the one with the largest number of mutations. This function also returns a 
 vector with the number of mutations in each haplotype.
 
-```{r}
+```{r sortbymut}
 lstSorted<-SortByMutations(lst$hseqs,lst$nr)
 lstSorted
 ```
@@ -226,7 +225,7 @@ lstSorted
 The frequencies of nucleotides or amino acids at each position can be computed 
 with the function `FreqMat`.
 
-```{r}
+```{r frequencymat}
 FreqMat(lst$hseqs)
 ```
 
@@ -234,7 +233,7 @@ To take into account the abundance of each haplotype when computing the
 mutation frequency, the haplotype abundances are passed to the function
 that computes the same matrix, but with the abundances.
 
-```{r}
+```{r frequencymat-abundance}
 FreqMat(lst$hseqs,lst$nr)
 ```
 
@@ -242,7 +241,7 @@ We may be interested only in mutated positions, so with `MutsTbl` the matrix
 obtained reports only the frequency of the mutated nucleotide or amino acid per
 position.
 
-```{r}
+```{r tablmutations}
 MutsTbl(lst$hseqs)
 ```
 
@@ -250,7 +249,7 @@ As can be done with `FreqMat`, with `MutsTbl` the abundances of the haplotypes
 can be passed to the function to obtain a mutation table with abundance
 information.
 
-```{r}
+```{r tablmutations-abundance}
 MutsTbl(lst$hseqs, lst$nr)
 ```
 
@@ -258,7 +257,7 @@ When the sequences are particularly large, the function `SummaryMuts` computes
 a table showing the polymorphic positions in the alignment and the frequency 
 of each nucleotide or amino acid observed.
 
-```{r}
+```{r summarymuts}
 SummaryMuts(lst$hseqs,lst$nr,off=0)
 ```
 
@@ -266,7 +265,7 @@ Then, the `PolyDist` function can be used to obtain the fraction of
 substitutions by polymorphic site in a simpler manner. This function can be 
 used either with or without the vector of abundances.
 
-```{r}
+```{r polydist}
 PolyDist(lst$hseqs,lst$nr)
 PolyDist(lst$hseqs)
 ```
@@ -275,7 +274,7 @@ To summarize the mutation information and compute the coverage of each
 mutation, the `ReportVariants` function is used. This function requires a 
 reference sequence, which in some cases could be the dominant haplotype.
 
-```{r}
+```{r report-variants}
 ReportVariants(lst$hseqs[2:length(lst$hseqs)],lst$hseqs[[1]],lst$nr)
 ```
 
@@ -284,13 +283,13 @@ with the information content (IC) of each position using `GetInfProfile`.
 If the sample is DNA, the maximum IC is 2, whereas when working with amino 
 acids, the maximum is 4.32.
 
-```{r}
+```{r getinf}
 GetInfProfile(lst$hseqs,lst$nr)
 ```
 
 And this can be plotted:
 
-```{r,fig.cap="Information content per position in the alignment"}
+```{r plotic ,fig.cap="Information content per position in the alignment"}
 dplot <- data.frame(IC=GetInfProfile(lst$hseqs,lst$nr),
                     pos=1:width(lst$hseqs)[1])
 
@@ -322,7 +321,7 @@ genotype variability.
 The first step is to load the target haplotype to be genotyped with
 `ReadAmplSeqs`, as is shown:
 
-```{r}
+```{r genotyping}
 filepath<-system.file("extdata","Unknown-Genotype.fna", package="QSutils")
 lst2Geno <- ReadAmplSeqs(filepath,type="DNA")
 hseq <- lst2Geno$hseq[1]
@@ -331,7 +330,7 @@ hseq
 
 The reference genotype sequences are then loaded using the same procedure.
 
-```{r}
+```{r genotyping-read}
 filepath<-system.file("extdata","GenotypeStandards_A-H.fas", package="QSutils")
 lstRefs <- ReadAmplSeqs(filepath,type="DNA")
 RefSeqs <- lstRefs$hseq
@@ -348,7 +347,7 @@ target haplotype to the reference sequences are stored in vector d. The
 distances from the target haplotype to the references, and the distances 
 between references of the same genotype.
 
-```{r}
+```{r DBrule}
 dm <- as.matrix(DNA.dist(c(hseq,RefSeqs),model="K80"))
 dgrp <- dm[-1,-1]
 d <- dm[1,-1]

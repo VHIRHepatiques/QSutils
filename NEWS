@@ -1,6 +1,33 @@
+CHANGES IN VERSION 0.99.3
+==========================
+
+	Internal changes:
+	-----------------
+	  - QSutils review correction:
+	  		· Vignette: add chunk names
+			· R Change class() -> is()
+			· R hide helper functions
+			· R join more than one function in one file
+			· R vectorize some apply
+			· R Change fn.ab.1,fn.ab.2 and fn.ab.3 -> fn.ab with 3 agruments in fn
+
+CHANGES IN VERSION 0.99.2
+==========================
+
+	Internal changes:
+	-----------------
+	  - Biocheck NOTEs correction:
+	  		· Change sapply()->vapply()
+			· Change 1:... -> seq_len()
+
 CHANGES IN VERSION 0.99.1
 ==========================
 
 	Internal changes:
 	-----------------
-	  - NOTE fix.
+	  - Correction of WARNINGS and ERRORS
+	    with Biocheck:
+		  · Collapse() example ERROR.
+		  · Change class()== -> is() or !is()
+		  · Update R version dependency from 3.4.0 to 3.5.
+		  · Correct -> 'VignetteIndexEntry{VignetteTitle}' in QSUtils-Alignment.Rmd

@@ -62,10 +62,8 @@ diversity indices [@Gregori2016] [@Gregori2014].
 
 # Install package
 
-```{r,message=FALSE}
-library(devtools)
-install_git("https://github.com/VHIRHepatiques/QSutils")
-
+```{r install,message=FALSE}
+BiocManager::install("QSutils")
 library(QSutils)
 ```
 
@@ -73,26 +71,26 @@ library(QSutils)
 
 Two different types of information define the quasispecies composition: the
 genomes present and their current frequency (abundance) in the viral 
-population. The package provides three functions to simulate abundance 
+population. The package provides three ways to simulate abundance 
 with various decreasing profiles.
 
 ## Powers of a fraction
 
-$fn.ab.1$ computes consecutive fractions, given the frequency of the most 
-abundant haplotype, according to: 
+$fn.ab$ setting the argument $fn$ to $pf$ computes consecutive fractions, 
+given the frequency of the most abundant haplotype, according to: 
 
 $$h ~r^{(i-1)}, ~~ r<1, ~~ i=1..n$$
-Using $table$ on the $fn.ab.1$ result, we obtain the number of haplotypes for
+Using $table$ on the $fn.ab$ result, we obtain the number of haplotypes for
 each frequency:
 
-```{r}
-table(fn.ab.1(25))
+```{r fn1}
+table(fn.ab(25,fn="pf"))
 ```
 
-```{r,fig.cap="Profile of abundances simulated with `fn.ab.1`"}
+```{r plotfn1,fig.cap="Profile of abundances simulated with `fn.ab` with fn=pf"}
 par(mfrow=c(1,2))
-plot(fn.ab.1(25),type="h")
-plot(fn.ab.1(25,r=0.7),type="h")
+plot(fn.ab(25,fn="pf"),type="h")
+plot(fn.ab(25,r=0.7,fn="pf"),type="h")
 ```
 
 The default value for $r$ is 0.5. Higher $r$ values moderate the decrease of
@@ -101,41 +99,41 @@ abundances. By default, the frequency of the most abundant haplotype, $h$, is
 
 ## Power of consecutive fractions
 
-$fn.ab.2$ computes the power of consecutive fractions, according to:
+$fn.ab$ with the argument $fn="pcf"$ computes the power of consecutive 
+fractions, according to:
 
 $$h ~ \frac{1}{i^{r}}, ~~ r>0, ~~ i=1..n$$
-Default values are 3 for $r$ and 10,000 for $h$. The higher the $r$, the more 
+Default values are 0.5 for $r$ and 10,000 for $h$. The higher the $r$, the more 
 pronounced the decrease in frequencies.
 
-```{r}
-table(fn.ab.2(25))
+```{r fn2}
+table(fn.ab(25,r=3,fn="pcf"))
 ```
 
-```{r}
-table(fn.ab.2(25,r=2))
+```{r fn2.2}
+table(fn.ab(25,r=2,fn="pcf"))
 ```
 
-```{r,fig.cap="Abundances simulated with `fn.ab.2`"}
+```{r plot-fn2,fig.cap="Abundances simulated with `fn.ab` with fn=pcf"}
 par(mfrow=c(1,2))
-plot(fn.ab.2(25),type="h")
-plot(fn.ab.2(25,r=2),type="h")
+plot(fn.ab(25,r=3,fn="pcf"),type="h")
+plot(fn.ab(25,r=2,fn="pcf"),type="h")
 ```
-
 
 ## Decreasing fractional powers
 
-$fn.ab.3$ computes decreasing roots of the maximum frequency, $h$,
+$fn.ab$ with $fn="dfp"$ computes decreasing roots of the maximum frequency, $h$,
 according to:
 
 $$h^{1/i},  ~~ i=1..n$$
-```{r}
-table(fn.ab.3(25))
+```{r fn3}
+table(fn.ab(25,fn="dfp"))
 ```
 
 
-```{r,fig.cap="Abundances simulated with `fn.ab.3`",out.width = '70%'}
+```{r plot-fn3,fig.cap="Abundances simulated with `fn.ab` with fn=dpf",out.width = '70%'}
 par(mfrow=c(1,2))
-plot(fn.ab.3(25),type="h")
+plot(fn.ab(25,fn="dfp"),type="h")
 ```
 
 The figure and the previous table both show that this function is the one that 
@@ -144,27 +142,27 @@ generates the greatest distance between the dominant haplotype and the others.
 To compare the profiles of the three functions, this figure plots the outputs 
 of the functions with default parameters.
 
-```{r,fig.cap="Comparison of the data simulation functions"}
+```{rplot-fn3.2,fig.cap="Comparison of the data simulation functions"}
 par(mfrow=c(1,3))
-plot(fn.ab.1(25),type="h",main="fn.ab.1")
-plot(fn.ab.2(25),type="h",main="fn.ab.2")
-plot(fn.ab.3(25),type="h",main="fn.ab.3")
+plot(fn.ab(25,fn="pf"),type="h",main="fn.ab - pf")
+plot(fn.ab(25,r=3,fn="pcf"),type="h",main="fn.ab - pcf")
+plot(fn.ab(25,fn="dfp"),type="h",main="fn.ab - dpf")
 ```
 
 A linear combination of results of the three functions provides greater
 flexibility.
 
 
-```{r}
-ab <- 0.25*fn.ab.1(25)+0.75*fn.ab.2(25)
+```{r linearcomb}
+ab <- 0.25*fn.ab(25,fn="pf")+0.75*fn.ab(25,r=3,fn="pcf")
 table(ab)
 ```
 ```{r,fig.cap="Abundances simulated with a linear combination of the functions"}
 plot(ab,type="h",main="Linear combination of results")
 ```
 
-```{r}
-ab <- 0.7*fn.ab.1(25)+0.3*fn.ab.3(25)
+```{r linearcomb2}
+ab <- 0.7*fn.ab(25,fn="pf")+0.3*fn.ab(25,fn="dfp")
 table(ab)
 ```
 
@@ -191,7 +189,7 @@ This function is useful to simulate a broad spectrum of frequency profiles,
 from quasispecies with very prevalent haplotypes to the above-mentioned long 
 queues of very low abundances, as illustrated in the next figure.
 
-```{r}
+```{r geomseq}
 par(mfrow=c(1,2))
 ab1 <- 1e5 * geom.series(100,0.8)
 plot(ab1,type="h",main="Geometric series with p=0.8",cex.main=1)
@@ -203,16 +201,16 @@ plot(ab2,type="h",main="Geometric series with p=0.001",ylim=c(0,max(ab2)),
 Linear combinations of geometric sequences with parameters of differing
 magnitudes help to obtain typical quasispecies profiles:
 
-```{r}
+```{r plot-geomseq}
 ab1 <- 1e5 * (geom.series(100,0.8)+geom.series(100,0.05))
 plot(ab1,type="h",main="Combination of geometric series")
 ```
 
-The functions $fn.ab.1$, $fn.ab.2$, and $fn.ab.3$ are flexible enough to obtain
-typical quasispecies profiles after filtering out all haplotypes below an 
-abundance threshold, considered the technical noise level. These functions, 
-combined with geometric series having low to very low parameter values, provide
-profiles close to those observed empirically.
+The function $fn.ab$ with fn argument set to $pf$, $pcf$, and $dfp$ is flexible
+enough to obtain typical quasispecies profiles after filtering out all 
+haplotypes below an abundance threshold, considered the technical noise level. 
+This function, combined with geometric series having low to very low parameter 
+values, provide profiles close to those observed empirically.
 
 # Random genomes and variant haplotypes
 
@@ -222,7 +220,7 @@ $GetRandomSeq$. The only parameter for this function is the genome length.
 The output is a fully random sequence of nucleotides, returned as a character 
 string.
 
-```{r}
+```{r randomseq}
 set.seed(23)
 m1 <- GetRandomSeq(50)
 m1
@@ -234,7 +232,7 @@ of variants to generate, $max.muts$ the maximum number of mutations in a
 genome, and $p.muts$ the probability for each number of mutations from 1 to 
 $max.muts$. It returns a vector of character strings with the variant genomes.
 
-```{r}
+```{r generatevars}
 v1 <- GenerateVars(m1,20,2,c(10,1))
 DottedAlignment(c(m1,v1))
 ```
@@ -245,12 +243,12 @@ With these functions we can simulate a quasispecies with a profile of acute
 infection; that is, characterized by a dominant haplotype which is fairly 
 abundant, together with a number of haplotypes at low abundances.
 
-```{r}
+```{r haploaccute}
 set.seed(23)
 n.genomes <- 25
 m1 <- GetRandomSeq(50)
 v1 <- GenerateVars(m1,n.genomes-1,2,c(10,1))
-w1 <- fn.ab.2(n.genomes)
+w1 <- fn.ab(n.genomes,r=3,fn="pcf")
 data.frame(Hpl=DottedAlignment(c(m1,v1)),Freq=w1)
 ```
 
@@ -259,7 +257,7 @@ haplotype frequencies, with haplotypes sorted by increasing number of mutations
 with respect to the dominant haplotype, and within the number of mutations,
 by decreasing order of abundance:
 
-```{r,fig.cap="Simulated abundances in an acute infection"}
+```{r plot accute,fig.cap="Simulated abundances in an acute infection"}
 qs <- DNAStringSet(c(m1,v1))
 lst <- SortByMutations(qs,w1) 
 qs <- lst$bseqs
@@ -281,18 +279,18 @@ than in acute infections. In this case, we would use $GenerateVars$ with a
 higher value of $max.muts$ and higher probabilities for mutants at any level.
 
 
-```{r}
+```{r haplo-chronic}
 set.seed(23)
 n.genomes <- 40
 m1 <- GetRandomSeq(50)
 v1 <- GenerateVars(m1,n.genomes-1,6,c(10,3,1,0.5,2,0.5)) 
-w1 <- fn.ab.2(n.genomes,r=1.5)
+w1 <- fn.ab(n.genomes,r=1.5,fn="pcf")
 data.frame(Hpl=DottedAlignment(c(m1,v1)),Freq=w1)
 ```
 
 Again, we can visualize the quasispecies composition using a bar plot.
 
-```{r,fig.cap="Simulated abundances in a chronic infection"}
+```{r plot-chronic,fig.cap="Simulated abundances in a chronic infection"}
 qs <- DNAStringSet(c(m1,v1)) 
 lst <- SortByMutations(qs,w1)
 qs <- lst$bseqs
@@ -311,7 +309,7 @@ rather than a single one. In this instance, the $Diverge$ function helps by
 producing variants with a common pattern of mutations.
 
 
-```{r}
+```{r diverge}
 set.seed(23)
 m1 <- GetRandomSeq(50)
 p2 <- Diverge(3:5,m1)
@@ -320,12 +318,12 @@ DottedAlignment(c(m1,p2))
 
 Variants of these sequences can be produced in the usual way by $GenerateVars$.
 
-```{r}
+```{r example}
 v1 <- GenerateVars(m1,20,3,c(10,4,0.2))
-wv1 <- fn.ab.2(length(v1),h=1000,r=1.5)
+wv1 <- fn.ab(length(v1),h=1000,r=1.5,fn="pcf")
 wp2 <- c(600,1000,400)
 v2 <- GenerateVars(p2[2],20,3,c(10,1,0.1))
-wv2 <- fn.ab.2(length(v2),r=2,h=wp2[2]*3)
+wv2 <- fn.ab(length(v2),r=2,h=wp2[2]*3,fn="pcf")
 
 qs <-DNAStringSet(c(m1,v1,p2,v2))
 w <- round(c(10000,wv1,wp2,wv2))
@@ -337,7 +335,7 @@ data.frame(Hpl=DottedAlignment(qs),nr=lst$nr)
 
 The genome Hpl_4_0001 gives rise to the segregating population.
 
-```{r,fig.cap="Simulated abundances with diverging populations"}
+```{r plot-example,fig.cap="Simulated abundances with diverging populations"}
 cnm <- cumsum(table(lst$nm))+1
 nm.pos <- as.vector(cnm)[-length(cnm)]
 names(nm.pos) <- names(cnm[-1])

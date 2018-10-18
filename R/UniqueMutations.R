@@ -1,7 +1,9 @@
 UniqueMutations <- 
 function(hseqs){ 
-    if(!is(hseqs,"DNAStringSet") & !is(hseqs,"AAStringSet"))
+    ## Computes the number of unique mutations in the alignment
+        ##  seqs: an aligment of haplotypes
+    if(!is(hseqs, "DNAStringSet") & !is(hseqs, "AAStringSet"))
         stop("The input object must be DNAStringSet or AAStringSet \n")
     mut.tbl <- MutsTbl(hseqs)
-    return(sum(apply(mut.tbl,1,function(x) sum(x>0))))
+    return(sum(rowSums(mut.tbl)))
 }

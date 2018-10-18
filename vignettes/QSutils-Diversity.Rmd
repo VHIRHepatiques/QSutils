@@ -52,10 +52,8 @@ abundance-based, and functional indices.
 
 First, the package should be installed and loaded.
 
-```{r,message=FALSE}
-library(devtools)
-install_git("https://github.com/VHIRHepatiques/QSutils")
-
+```{r install,message=FALSE}
+BiocManager::install("QSutils")
 library(QSutils)
 ```
 
@@ -65,7 +63,7 @@ vignette deals with the different ways to load data:
 available.
 
 
-```{r}
+```{r load-ex}
 filepath<-system.file("extdata","ToyData_10_50_1000.fna", package="QSutils")
 lst <- ReadAmplSeqs(filepath,type="DNA")
 lst
@@ -81,7 +79,7 @@ mutations. These indices can be computed as follows:
 
 + number of haplotypes
 
-    ```{r}
+    ```{r numbhaplo}
     length(lst$hseqs)
     ```
 
@@ -90,7 +88,7 @@ mutations. These indices can be computed as follows:
 
 + The number of polymorphic sites
 
-    ```{r}
+    ```{r segsites}
     SegSites(lst$hseqs)
     ```
 
@@ -99,7 +97,7 @@ mutations. These indices can be computed as follows:
 
 + Number of mutations
 
-    ```{r}
+    ```{r nummutations}
     TotalMutations(lst$hseqs)
     ```
 
@@ -112,7 +110,7 @@ their relative abundance in the population.
 
 + Shannon entropy
 
-    ```{r}
+    ```{r shannon}
     Shannon(lst$nr)
     NormShannon(lst$nr)
     ```
@@ -128,14 +126,14 @@ their relative abundance in the population.
     The variance of Shannon entropy and normalized Shannon entropy can be 
     computed with:
 
-    ```{r}
+    ```{r shannon var}
     ShannonVar(lst$nr)
     NormShannonVar(lst$nr)
     ```
 
 + Gini-Simpson
 
-    ```{r}
+    ```{r ginnisimpsion}
     GiniSimpson(lst$nr)
     GiniSimpsonMVUE(lst$nr)
     ```
@@ -150,7 +148,7 @@ their relative abundance in the population.
     
     The variance of the Gini-Simpson index is obtained with:
 
-    ```{r}
+    ```{r ginivar}
     GiniSimpsonVar(lst$nr)
     ```
     
@@ -164,7 +162,7 @@ their relative abundance in the population.
     to frequency changes. In contrast, Hill numbers are a generalization of 
     diversity measures in units of equally abundant species.
 
-    ```{r}
+    ```{r hill}
     Hill(lst$nr,q=1)
     ```
 
@@ -173,17 +171,17 @@ their relative abundance in the population.
     for different _q_ values, so that one can see what happens when _q_ 
     increases in a plot.
 
-    ```{r, fig.cap="Hill numbers profile", eval=FALSE}
+    ```{r hillplot, fig.cap="Hill numbers profile", eval=FALSE}
     HillProfile(lst$nr)
     plot(HillProfile(lst$nr),type ="b", main="Hill numbers obtained
         with HillProfile")
     ```
     
-    ```{r,echo=FALSE}
+    ```{r hillprofile,echo=FALSE}
     HillProfile(lst$nr)
     ```
     
-```{r, fig.cap="Hill numbers profile", echo=FALSE}
+```{r plothill, fig.cap="Hill numbers profile", echo=FALSE}
 plot(HillProfile(lst$nr),type ="b", main="Hill numbers obtained
     with HillProfile")
 ```
@@ -198,23 +196,23 @@ haplotype.
     
 + Rényi entropy
 
-    ```{r}
+    ```{r renyi}
     Renyi(lst$nr,q=3)
     ```
 
     Rényi entropy is a log transformation of the Hill numbers.    
     
-    ```{r,fig.cap="Rényi entropy profile",eval=FALSE}
+    ```{r reniyprofile,fig.cap="Rényi entropy profile",eval=FALSE}
     RenyiProfile(lst$nr)
     plot(RenyiProfile(lst$nr),type ="b", main="Rényi entropy obtained with
         RenyiProfile")
     ```
 
-    ```{r,echo=FALSE}
+    ```{r plotreniy,echo=FALSE}
     RenyiProfile(lst$nr)
     ```
 
-```{r,fig.cap="Rényi entropy profile",echo=FALSE}
+```{r reniyplot,fig.cap="Rényi entropy profile",echo=FALSE}
 plot(RenyiProfile(lst$nr),type ="b", main="Rényi entropy obtained with
     RenyiProfile")
 ```
@@ -225,31 +223,31 @@ as _q_ increases.
     
 + Havrda-Charvat estimator
 
-    ```{r}
+    ```{r hcq}
     HCq(lst$nr, q= 4)
     ```
     
     Havrda-Charvat entropy, a measure of the diversity of each population, is a
     generalization of Shannon entropy.
     
-    ```{r}
+    ```{r hcqvar}
     HCqVar(lst$nr, q= 4)
     ```
     
     The asymptotic variance for a given exponent of this estimator can be 
     computed with `HCqVar`. 
     
-    ```{r,fig.cap="Havrda-Charvat entropy profile",eval=FALSE}
+    ```{r hcprofile,fig.cap="Havrda-Charvat entropy profile",eval=FALSE}
     HCqProfile(lst$nr)
     plot(HCqProfile(lst$nr),type ="b", main="Havrda-Charvat entropy obtained 
         with HCqProfile")
     ```
 
-    ```{r,echo=FALSE}
+    ```{r hcqplot,echo=FALSE}
     HCqProfile(lst$nr)
     ```
     
-```{r,fig.cap="Havrda-Charvat entropy profile",echo=FALSE}
+```{r plothcq,fig.cap="Havrda-Charvat entropy profile",echo=FALSE}
 plot(HCqProfile(lst$nr),type ="b", main="Havrda-Charvat entropy obtained 
     with HCqProfile")
 ```
@@ -267,7 +265,7 @@ between haplotypes in the quasispecies by considering their genetic distances.
 
 This set of functions only considers the distances between haplotypes.
 
-```{r,message=FALSE,fig.cap="Correlation among haplotype distances"}
+```{r dist ,message=FALSE,fig.cap="Correlation among haplotype distances"}
 dst <- DNA.dist(lst$hseqs,model="raw")
 library(psych)
 D <- as.matrix(dst)
@@ -279,7 +277,7 @@ D
 
 + Average mutation frequency by entity
 
-    ```{r}
+    ```{r mfe}
     MutationFreq(dst) 
     ```
 
@@ -289,7 +287,7 @@ D
 
 + FAD
 
-    ```{r}
+    ```{r fad}
     FAD(dst)
     ```
 
@@ -298,7 +296,7 @@ D
 
 + Nucleotide diversity by entity
 
-    ```{r}
+    ```{r pi_e}
     NucleotideDiversity(dst)  
     ```
 
@@ -311,7 +309,7 @@ D
 
 + Average mutation frequency by molecule
 
-    ```{r}
+    ```{r mfm}
     nm <- nmismatch(pairwiseAlignment(lst$hseqs,lst$hseqs[1]))
     MutationFreq(nm=nm,nr=lst$nr,len=width(lst$hseqs)[1])
     ```
@@ -320,7 +318,7 @@ D
     measures the fraction of nucleotides in the population that differ from 
     the dominant haplotype in the quasispecies.
     
-    ```{r}
+    ```{r mfvar}
     MutationFreqVar(nm,lst$nr,len=width(lst$hseqs)[1])
     ```
     
@@ -328,7 +326,7 @@ D
     
 + Nucleotide diversity 
 
-    ```{r}
+    ```{r pi}
     NucleotideDiversity(dst,lst$nr)
     ```
 
@@ -338,30 +336,30 @@ D
 
 + Rao entropy
 
-    ```{r}
+    ```{r rao}
     RaoPow(dst,4,lst$nr)
     ```
 
     To obtain the Rao entropy for a given order of _q_, the RaoPow function is
     used.
 
-    ```{r}
+    ```{r raovar}
     RaoVar(dst,lst$nr)
     ```
 
     The variance of \(\pi_m\) is calculated with the `RaoVar` function.
 
-    ```{r,fig.cap="Havrda-Charvat entropy profile",eval=FALSE}
+    ```{r raoprofile,fig.cap="Havrda-Charvat entropy profile",eval=FALSE}
     RaoPowProfile(dst,lst$nr)
     plot(RaoPowProfile(dst,lst$nr),type ="b", main="Rao entropy obtained 
         with RaoPowProfile")
     ```
 
-    ```{r,echo=FALSE}
+    ```{r raoplot,echo=FALSE}
     RaoPowProfile(dst,lst$nr)
     ```
     
-```{r,fig.cap="Rao entropy profile",echo=FALSE}
+```{r plotrao,fig.cap="Rao entropy profile",echo=FALSE}
 plot(RaoPowProfile(dst,lst$nr),type ="b", main="Rao entropy obtained 
         with RaoPowProfile")
 ```
@@ -404,7 +402,7 @@ samples,and the samples after noise filtering at an abundance of 0.1%, and
 after the DSFT corrections at size 2000, and filtering at 0.2% with 95% 
 confidence.
 
-```{r,fig.cap="Diversity index variations due to sample size"}
+```{r downsampling,fig.cap="Diversity index variations due to sample size"}
 set.seed(123)
 n <- 2000
 y <- geom.series(n,0.8)+geom.series(n,0.00025)
@@ -466,7 +464,7 @@ abundance filter.
 
 Let’s generate a random quasispecies with an RHL of about 25%:
 
-```{r}
+```{r ex-dsft}
 set.seed(123)
 n <- 2000
 y <- geom.series(n,0.8)+geom.series(n,0.0002)
@@ -482,7 +480,7 @@ sizes.
 
 The population value is shown in the next figure as a dash-dot horizontal line.
 
-```{r}
+```{r ex2-dsft}
 thr <- 0.1
 sz1 <- 5000
 sz2 <- 10000
