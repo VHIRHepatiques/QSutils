@@ -1,3 +1,11 @@
+CHANGES IN VERSION 0.99.8
+==========================
+
+	Internal changes:
+	-----------------
+		- QSutils review correction:
+			· Add exports to NAMESPACE
+
 CHANGES IN VERSION 0.99.4,5, and 7
 ==========================
 
