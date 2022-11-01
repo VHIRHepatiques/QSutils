@@ -1,7 +1,7 @@
 Package: QSutils
 Type: Package
 Title: Quasispecies Diversity
-Version: 1.15.0
+Version: 1.16.0
 Date: 2018-04-06
 Authors@R:c(person("Mercedes", "Guerrero-Murillo", email="mergumu@gmail.com", role=c("cre", "aut"), comment = c(ORCID = "0000-0002-5556-2460")),  person("Josep", "Gregori i Font", role=c ("aut"), comment = c(ORCID = "0000-0002-4253-8015")))
 Depends: R (>= 3.5), Biostrings, BiocGenerics,methods
