@@ -10,3 +10,7 @@ install_git("https://github.com/VHIRHepatiques/QSutils")
 
 library(QSutils)
 ```
+
+# Contact Information
+
+Address any question/suggestion to Mercedes Guerrero-Murillo <mergumu@gmail.com>
